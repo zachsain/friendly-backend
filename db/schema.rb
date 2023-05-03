@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_10_202959) do
+ActiveRecord::Schema.define(version: 2023_05_03_172216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,42 +43,45 @@ ActiveRecord::Schema.define(version: 2023_01_10_202959) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "brands", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "head_quarters"
-    t.string "logo_url"
-    t.text "description"
+  create_table "matches", force: :cascade do |t|
+    t.integer "user1_id"
+    t.integer "matched_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "pieces", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "brand_id"
-    t.integer "style_id"
-    t.string "name"
-    t.string "price"
-    t.string "notes"
-    t.string "size"
-    t.string "image_url"
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "match_id"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id"], name: "index_messages_on_match_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "styles", force: :cascade do |t|
-    t.string "name"
-    t.string "url_photo"
-    t.string "description"
-    t.string "category"
+  create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.text "bio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "swipes", force: :cascade do |t|
+    t.integer "swiper_id"
+    t.integer "swipee_id"
+    t.string "direction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "password_digest"
     t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

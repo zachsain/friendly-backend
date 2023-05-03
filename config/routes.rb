@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :matches
+  resources :messages
+  resources :swipes
+  resources :profiles
   resources :pieces
   resources :piece_of_clothings
   resources :brands

@@ -1,9 +1,7 @@
 class User < ApplicationRecord
-    has_many :pieces
-    has_many :styles, -> { distinct }, through: :pieces
-    has_many :brands, -> { distinct }, through: :pieces
-
-    validates :username, presence: true, uniqueness: true
-    has_secure_password
-    has_one_attached :featured_image
+    has_one :profile
+    has_many :swipes
+    has_many :sent_messages, class_name: "Message", foreign_key: :user_id
+    has_many :matches, foreign_key: :user1_id
+    has_many :matched_users, through: :matches, source: :user2
 end
