@@ -3,7 +3,7 @@ class CreateMessages < ActiveRecord::Migration[6.1]
     create_table :messages do |t|
       t.belongs_to :sender, foreign_key: { to_table: :users }
       t.belongs_to :receiver, foreign_key: { to_table: :users }
-      t.belongs_to :match, foreign_key: true
+      t.integer :match_id
       t.text :content
       t.timestamps
     end
