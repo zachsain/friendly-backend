@@ -1,4 +1,6 @@
 class Swipe < ApplicationRecord
-    belongs_to :user
-    belongs_to :profile
+    belongs_to :swiper, class_name: 'User'
+    belongs_to :swipee, class_name: 'User'
+  
+    validates :direction, presence: true
 end
