@@ -1,0 +1,39 @@
+.swipeButtons{
+    position: fixed;
+    bottom: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.swipeButtons .MuiIconButton-root{
+    background-color: white;
+    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.swipeButtons__repeat{
+    padding: 3vw !important;
+    color: #f5b748 !important;
+}
+
+.swipeButtons__left {
+    padding: 3vw !important;
+    color: #ec5e6f !important;
+}
+
+.swipeButtons__star {
+    padding: 3vw !important;
+    color: #62b4f9 !important;
+}
+
+.swipeButtons__right {
+    padding: 3vw !important;
+    color: #76e2b3 !important;
+}
+
+.swipeButtons__lightening {
+    padding: 3vw !important;
+    color: #915dd1 !important;
+}
+/* MuiIconButton-root is a special class the Mui gives their buttons  */
+/* padding: 3vw says depending on the size of the screen only use 3 percent of screen */

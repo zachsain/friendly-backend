@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { signInWithEmailAndPassword } from "firebase/auth";
-import  { auth } from "./firebase"
 import './LoginForm.css'
 
 function LoginForm({ setLoginOrSignup}) {
@@ -8,16 +6,10 @@ function LoginForm({ setLoginOrSignup}) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const handleLogin = async (event) => {
-        event.preventDefault();
-        try {
-          const userCredential = await signInWithEmailAndPassword(auth, email, password);
-          console.log("logged in")
-        } catch (error) {
-          const errorMessage = error.message;
-          // Handle error
-        }
-      };
+    function handleLogin(e){
+      e.preventDefaul()
+      console.log(e)
+    }
     
   return (
   <div className="login-container">
