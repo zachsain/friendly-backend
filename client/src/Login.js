@@ -3,7 +3,7 @@ import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 import './Login.css'
 
-function Login() {
+function Login({setUser}) {
     const [loginOrSignup, setLoginOrSignup] = useState(true)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -13,14 +13,14 @@ function Login() {
         {loginOrSignup ? 
             ( 
             <div>
-                <LoginForm setLoginOrSignup={setLoginOrSignup} />
+                <LoginForm setUser={setUser} setLoginOrSignup={setLoginOrSignup} />
                 <br />
             </div>
             ) 
             : 
             (
             <div>
-                <SignupForm setLoginOrSignup={setLoginOrSignup}  />
+                <SignupForm setUser={setUser} setLoginOrSignup={setLoginOrSignup}  />
                 <br />
                 {/* <div>
                 <h3 className="new-account-header">Or...</h3>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Header';
-import ReactDOM from "react-dom/client";
+// import ReactDOM from "react-dom/client";
 import { Switch, Route } from "react-router-dom";
 import Card from './Card';
 import SwipeButtons from './SwipeButtons';
@@ -13,7 +13,7 @@ import Login from './Login';
 
 
 function App() {
-  // const [user, setUser] = useState(auth.currentUser)
+  const [user, setUser] = useState(null)
 
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -22,12 +22,38 @@ function App() {
   //   return unsubscribe;
   // }, []);
 
+  useEffect(() => {
+    // auto-login
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+   
+      }
+    });
+  } , []);
+
+  if (!user) return (
+    <div>
+        <Login setUser={setUser} />
+    </div>)
 
   return (
     <div className="App">
-      {/* <Header/> */}
-     <Login/>
-      {/* <CreateProfile /> */}
+    <Header /> 
+      <Switch>
+      <Route path = "/chat/:person">
+          <ChatScreen />
+        </Route>
+        <Route path = "/chat">
+          <Chats />
+        </Route>
+        <Route exact path = "/">
+          <Card />
+          <SwipeButtons />
+        </Route>
+      </Switch> 
+
+
       {/* <Switch>
       <Route path = "/chat/:person">
           <Header backButton="/chat" /> 
@@ -42,7 +68,7 @@ function App() {
           <Card />
           <SwipeButtons />
         </Route>
-      </Switch> */}
+      </Switch>  */}
       
     </div>
   );

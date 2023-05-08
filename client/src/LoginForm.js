@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './LoginForm.css'
 
-function LoginForm({ setLoginOrSignup}) {
+function LoginForm({ setUser, setLoginOrSignup}) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -10,7 +10,7 @@ function LoginForm({ setLoginOrSignup}) {
       e.preventDefaul()
       console.log(e)
     }
-    
+
   return (
   <div className="login-container">
     <form className="login-form">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import TinderCard from 'react-tinder-card'
-import db from './fb';
+// import { Spring } from 'react-spring/web'
 import './TinderCards.css'
 
 function Card() {
@@ -26,7 +26,7 @@ function Card() {
     <div className="card-container"> 
         <div className="tinderCards__cardContainer">
           {people.map(person => {
-            return  <TinderCard
+            return <TinderCard
                     className="swipe"
                     key= {person.name}
                     // preventSwipe={['up', 'down']}

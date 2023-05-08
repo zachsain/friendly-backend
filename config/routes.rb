@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   resources :messages
   resources :swipes
   resources :profiles
-  resources :pieces
-  resources :piece_of_clothings
-  resources :brands
-  resources :styles
   resources :users
 
   post "/signup", to: "users#create"

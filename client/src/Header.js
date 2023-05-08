@@ -8,23 +8,21 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import "./Header.css"
 
 
-function Header( { backButton }) {
+function Header( ) {
   const history = useHistory()
 
   return (
     <div className="header">
-      {backButton ? 
-        (
-        <IconButton onClick={() => history.replace(backButton)}>
+  
+        
+        {/* <IconButton onClick={() => history.replace(backButton)}>
           <ArrowBackIosIcon fontSize="large" className="header__icon"/>
-        </IconButton>
-        ) 
-        : 
-        (<IconButton> 
+        </IconButton> */}
+        
+        <IconButton> 
           <Person2Icon className="header__icon" fontSize="large"/>
         </IconButton>
-        )}
-        
+       
         <Link to="/">
           <img 
               className="header__logo"
