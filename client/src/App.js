@@ -27,7 +27,7 @@ function App() {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => (setUser(user), console.log(user)));
    
       }
     });
@@ -37,6 +37,17 @@ function App() {
     <div>
         <Login setUser={setUser} />
     </div>)
+
+    function handleLogout(e){
+      e.preventDefault();        
+      fetch("/logout", { method: "DELETE" }).then((r) => {
+          if (r.ok) {
+            console.log("good bye")
+            setUser(null)
+          }
+        });
+
+    }
 
   return (
     <div className="App">
@@ -56,6 +67,8 @@ function App() {
           <SwipeButtons />
         </Route>
       </Switch> 
+
+      <button onClick={handleLogout}>LogOut</button>
 
 
       {/* <Switch>

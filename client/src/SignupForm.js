@@ -31,19 +31,18 @@ function SignupForm({ setLoginOrSignup, setUser }) {
         username,
         password,
         email,
-        profile: {
-          first_name: firstName,
-          last_name: lastName,
-          bio,
-          gender,
-          dob,
-          featured_image: image // you can pass a file here, if you're using FormData
-      }
+        first_name: firstName,
+        last_name: lastName,
+        bio,
+        gender,
+        dob,
+        featured_image: image
+      
       }),
     }).then((r) => {
       if (r.ok) {
         // history.push('/activities');
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => (setUser(user), console.log(user)));
       } else {
         r.json().then((err) => setErrors(err.error), setShowErrors(true));
       }
@@ -127,7 +126,9 @@ function SignupForm({ setLoginOrSignup, setUser }) {
               yearDropdownItemNumber={100}
               />
         </div>
+        
         <input className="image-field" type="file" accept="image/*" multiple={false} onChange={onImageChange} />
+
         <button type="submit" className="signup-button" onClick={handleSignup}>
           Sign up
         </button>
