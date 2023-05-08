@@ -18,10 +18,11 @@ function Header( ) {
         {/* <IconButton onClick={() => history.replace(backButton)}>
           <ArrowBackIosIcon fontSize="large" className="header__icon"/>
         </IconButton> */}
-        
-        <IconButton> 
-          <Person2Icon className="header__icon" fontSize="large"/>
-        </IconButton>
+        <Link to="/userprofile">
+          <IconButton> 
+            <Person2Icon className="header__icon" fontSize="large"/>
+          </IconButton>
+        </Link>
        
         <Link to="/">
           <img 

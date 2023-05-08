@@ -4,91 +4,64 @@ import './SignupForm.css'
 
 function CreateProfile() {
 
-//     const [userList, setUserList] = useState([])
-//     const userCollectionRef = collection(db, 'users')
-//     const [firstName, setFirstName] = useState("")
-//     const [lastName, setLastName] = useState("")
-//     const [email, setEmail] = useState("")
-//     const [bio, setBio] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [bio, setBio] = useState("")
+    const [image, setImage] = useState("")
+    const [errors, setErrors] = useState('');
+    const [showErrors, setShowErrors] = useState('')
 
-//     useEffect(() => {
-//         const getUserList = async () => {
-//             try {
-//                 const data = await getDocs(userCollectionRef)
-//                 const filteredData = data.docs.map((doc) => ({
-//                     ...doc.data(), id: doc.id
-//                 }))
-//                 setUserList(filteredData)
-//             } catch (err) {
-//                 console.error(err)
-//             }
-//         }
-//         getUserList()
-//     }, [])
+    function handleCreateProfile(e) {
+      e.preventDefault()
 
-//     console.log(userList)
+    }
 
-// let name;
+    function onImageChange(e){
+        setImage(e.target.files[0]);
+    }
+    
+  return (
+    <div>
+     <div className="signup-container">
+      <form className="signup-form" >
+        <h2 className="signup-heading">Create Profile</h2>
+        <input
+          type="text"
+          placeholder="First Name"
+          value={firstName}
+          onChange={(event) => setFirstName(event.target.value)}
+          className="signup-input"
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(event) => setLastName(event.target.value)}
+          className="signup-input"
+        />
+         <input
+          type="bio"
+          placeholder="Bio"
+          value={bio}
+          onChange={(event) => setBio(event.target.value)}
+          className="signup-input"
+        />
+        <input type="file" accept="image/*" multiple={false} onChange={onImageChange} />
 
-// userList.map((u) => {
-//     name = u.firstName
-// })
+        <button type="submit" className="signup-button" onClick={handleCreateProfile}>
+          Create
+        </button>
+        {errors && <p className="signup-error">{errors}</p>}
+      </form>
 
-// const handleCreateProfile = async (event) => {
-//     event.preventDefault();
-//     try{
-//         await addDoc(userCollectionRef, {
-//             firstName: firstName, 
-//             lastName: lastName,
-//             email: email
-//         })
-//     } catch (err){
-//         console.error(err)
-//     }
-   
-// }
-//   return (
-//     <div>
+        
+      {/* <button onClick={logout}> Logout </button> */}
+    </div>
 
-//     <div className="signup-container">
-//       <form className="signup-form">
-//         <h2 className="signup-heading">Sign up</h2>
-//         <input
-//           type="text"
-//           placeholder="First Name"
-//           value={firstName}
-//           onChange={(event) => setFirstName(event.target.value)}
-//           className="signup-input"
-//         />
-//         <input
-//           type="text"
-//           placeholder="Last Name"
-//           value={lastName}
-//           onChange={(event) => setLastName(event.target.value)}
-//           className="signup-input"
-//         />
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           value={email}
-//           onChange={(event) => setEmail(event.target.value)}
-//           className="signup-input"
-//         />
-//         <input
-//           type="bio"
-//           placeholder="bio"
-//           value={bio}
-//           onChange={(event) => setBio(event.target.value)}
-//           className="signup-input"
-//         />
-//         <button onClick={handleCreateProfile} type="submit" className="signup-button">
-//           Sign up
-//         </button>
-//       </form>
-//     </div>
-//     <h1>{name}</h1>
-//     </div>
-//   )
+
+    </div>
+  )
 }
 
 export default CreateProfile

@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 2023_05_03_172216) do
   create_table "profiles", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "bio"
+    t.string "gender"
+    t.datetime "dob"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

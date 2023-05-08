@@ -9,6 +9,7 @@ import Chats from './Chats';
 import ChatScreen from './ChatScreen';
 import SignupForm from './SignupForm';
 import CreateProfile from './CreateProfile';
+import UserProfile from './UserProfile';
 import Login from './Login';
 
 
@@ -46,6 +47,9 @@ function App() {
         </Route>
         <Route path = "/chat">
           <Chats />
+        </Route>
+        <Route path = "/userprofile">
+          <UserProfile />
         </Route>
         <Route exact path = "/">
           <Card />
