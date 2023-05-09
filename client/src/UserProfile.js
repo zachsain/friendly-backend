@@ -1,12 +1,14 @@
-import React from 'react'
-import CreateProfile from './CreateProfile'
+import React, { useContext } from 'react'
+import AppContext from './AppContext';
+import TinderCard from 'react-tinder-card'
+
 
 function UserProfile() {
+    const user = useContext(AppContext);
+    console.log(user);
   return (
     <div className="userProfile">
-       <CreateProfile />
-
-
+        profile page 
     </div>
   )
 }

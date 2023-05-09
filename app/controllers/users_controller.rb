@@ -2,18 +2,6 @@ class UsersController < ApplicationController
     before_action :authorize, only: [:show]
     rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found
 
-    # def create
-    #     user = User.create(user_params)
-    #     if user.valid?
-    #       session[:user_id] = user.id
-    #       render json: user, status: :created
-    #     else
-    #       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
-    #     end
-    # end
-    
-
-
     def create
         user = User.create(user_params)
         if user.valid?
@@ -21,6 +9,7 @@ class UsersController < ApplicationController
           
           profile = Profile.new(profile_params)
           profile.user_id = user.id
+          profile.featured_image.attach(params[:featured_image])
           profile.save
           
           render json: user, status: :created
@@ -33,12 +22,7 @@ class UsersController < ApplicationController
         current_user = User.find(session[:user_id])
         render json: current_user
       end 
-      
-    # def show
-    #     current_user = User.find(session[:user_id])
-    #     render json: current_user
-    # end 
-  
+
     private
 
     def user_params

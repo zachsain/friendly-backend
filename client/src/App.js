@@ -11,6 +11,7 @@ import SignupForm from './SignupForm';
 import CreateProfile from './CreateProfile';
 import UserProfile from './UserProfile';
 import Login from './Login';
+import AppContext from './AppContext';
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
 
   return (
     <div className="App">
+    <AppContext.Provider value={user}>
     <Header /> 
       <Switch>
       <Route path = "/chat/:person">
@@ -66,27 +68,9 @@ function App() {
           <Card />
           <SwipeButtons />
         </Route>
-      </Switch> 
-
-      <button onClick={handleLogout}>LogOut</button>
-
-
-      {/* <Switch>
-      <Route path = "/chat/:person">
-          <Header backButton="/chat" /> 
-          <ChatScreen />
-        </Route>
-        <Route path = "/chat">
-          <Header backButton="/" /> 
-          <Chats />
-        </Route>
-        <Route exact path = "/">
-          <Header />
-          <Card />
-          <SwipeButtons />
-        </Route>
-      </Switch>  */}
-      
+      </Switch>
+      <button onClick={handleLogout}>LogOut</button> 
+      </AppContext.Provider>
     </div>
   );
 }

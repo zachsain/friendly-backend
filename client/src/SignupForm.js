@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {useHistory} from "react-router-dom";
 import './SignupForm.css';
 
 function SignupForm({ setLoginOrSignup, setUser }) {
@@ -10,7 +11,6 @@ function SignupForm({ setLoginOrSignup, setUser }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [errors, setErrors] = useState('');
-  const [showErrors, setShowErrors] = useState('');
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
   const [image, setImage] = useState(null);
@@ -18,33 +18,37 @@ function SignupForm({ setLoginOrSignup, setUser }) {
   const [gender, setGender] = useState('');
   const [dob, setDob] = useState(null);
   const genderOptions = ['Male', 'Female', 'Non-binary', 'Other'];
+  const history = useHistory();
 
   function handleSignup(e) {
     e.preventDefault();
     setErrors([]);
-    fetch("/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-        first_name: firstName,
-        last_name: lastName,
-        bio,
-        gender,
-        dob,
-        featured_image: image
-      
-      }),
+
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("email", email);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("bio", bio);
+    formData.append("gender", gender);
+    formData.append("dob", dob);
+    formData.append("featured_image", image);
+
+    fetch('/signup', {
+      method: 'POST',
+      body: formData
     }).then((r) => {
       if (r.ok) {
-        // history.push('/activities');
-        r.json().then((user) => (setUser(user), console.log(user)));
+        r.json().then((user) => {
+          setUser(user);
+          console.log(user);
+          history.push('/')
+        });
       } else {
-        r.json().then((err) => setErrors(err.error), setShowErrors(true));
+        r.json().then((error) => {
+          setErrors(error.error);
+        });
       }
     });
   }
@@ -126,7 +130,7 @@ function SignupForm({ setLoginOrSignup, setUser }) {
               yearDropdownItemNumber={100}
               />
         </div>
-        
+
         <input className="image-field" type="file" accept="image/*" multiple={false} onChange={onImageChange} />
 
         <button type="submit" className="signup-button" onClick={handleSignup}>
@@ -143,3 +147,5 @@ function SignupForm({ setLoginOrSignup, setUser }) {
 };
 
 export default SignupForm;
+
+
