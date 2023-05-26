@@ -17,13 +17,6 @@ import AppContext from './AppContext';
 function App() {
   const [user, setUser] = useState(null)
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     setUser(user);
-  //   });
-  //   return unsubscribe;
-  // }, []);
-
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
@@ -52,7 +45,7 @@ function App() {
 
   return (
     <div className="App">
-    <AppContext.Provider value={user}>
+    <AppContext.Provider value={{user, setUser}}>
     <Header /> 
       <Switch>
       <Route path = "/chat/:person">
@@ -64,10 +57,16 @@ function App() {
         <Route path = "/userprofile">
           <UserProfile />
         </Route>
-        <Route exact path = "/">
-          <Card />
-          <SwipeButtons />
-        </Route>
+        <Route exact path="/">
+            {user ? (
+              <>
+                <Card />
+                <SwipeButtons />
+              </>
+            ) : (
+              <Login setUser={setUser} />
+            )}
+          </Route>
       </Switch>
       <button onClick={handleLogout}>LogOut</button> 
       </AppContext.Provider>

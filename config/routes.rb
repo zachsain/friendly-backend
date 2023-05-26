@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  patch '/users/:user_id/profile', to: 'profiles#update'
+
 
   Rails.application.routes.default_url_options[:host] = "localhost:3000"
 

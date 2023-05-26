@@ -1,10 +1,12 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import TinderCard from 'react-tinder-card'
+import AppContext from './AppContext'
 // import { Spring } from 'react-spring/web'
 import './TinderCards.css'
 
 function Card() {
     const [people, setPeople] = useState([])
+    const user = useContext(AppContext);
 
     useEffect(() => {
       // const unsubscribe = db.collection('people').onSnapshot(snapshot => {
@@ -22,10 +24,14 @@ function Card() {
       // this is called a cleanup function ^^
     }, []);
 
+    if (!Array.isArray(user) || user === null) {
+      return null; // Or display a loading message
+    }
+
   return (
     <div className="card-container"> 
         <div className="tinderCards__cardContainer">
-          {people.map(person => {
+          {user.map(person => {
             return <TinderCard
                     className="swipe"
                     key= {person.name}
