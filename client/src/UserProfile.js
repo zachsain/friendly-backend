@@ -26,27 +26,54 @@ function UserProfile() {
         setIsEditFormVisible(!isEditFormVisible)
     }
 
-  return (
-    <div className="userProfile">
-      <div className="image-h1-container">
-        <img className="userProfile__image" src={user.profile.featured_image.url} alt="profile-photo" /> 
-        <h1 className="userProfile__h1">{user.profile.first_name} {age}</h1>
-       </div>
-       <p className="userProfile__p">{user.profile.bio}</p>
-       <IconButton className="edit-icon-container">
-        <BorderColorIcon onClick={handleEditClick} className="edit-icon" />
-       </IconButton>
-       <Modal isOpen={isEditFormVisible} onRequestClose={handleEditClick} appElement={document.getElementById('root')}>
-            <ProfileEditForm
-                setIsEditFormVisible={setIsEditFormVisible}
-                fn={user.profile.first_name}
-                ln={user.profile.last_name}
-                b={user.profile.bio}
-                imageUrl={user.profile.featured_image.url}
-            />
+    return (
+      <div>
+        <div onClick={handleEditClick} className="userProfile">
+        <div className="userProfile__image-container">
+          <img className="userProfile__image" src={user.profile.featured_image.url} alt="profile-photo" />
+          <h1 className="userProfile__h1">{user.profile.first_name} {age}</h1>
+        </div>
+        <p className="userProfile__p">{user.profile.bio}</p>
+        </div>
+        {/* <IconButton className="edit-icon-container">
+          <BorderColorIcon onClick={handleEditClick} className="edit-icon" />
+        </IconButton> */}
+        <Modal isOpen={isEditFormVisible} onRequestClose={handleEditClick} appElement={document.getElementById('root')}>
+          <ProfileEditForm
+            setIsEditFormVisible={setIsEditFormVisible}
+            fn={user.profile.first_name}
+            ln={user.profile.last_name}
+            b={user.profile.bio}
+            imageUrl={user.profile.featured_image.url}
+          />
         </Modal>
-    </div>
-  )
+
+      </div>
+    )
+    
 }
 
 export default UserProfile
+
+
+// return (
+//   <div className="userProfile">
+//     <div className="image-h1-container">
+//       <img className="userProfile__image" src={user.profile.featured_image.url} alt="profile-photo" /> 
+//       <h1 className="userProfile__h1">{user.profile.first_name} {age}</h1>
+//      </div>
+//      <p className="userProfile__p">{user.profile.bio}</p>
+//      <IconButton className="edit-icon-container">
+//       <BorderColorIcon onClick={handleEditClick} className="edit-icon" />
+//      </IconButton>
+//      <Modal isOpen={isEditFormVisible} onRequestClose={handleEditClick} appElement={document.getElementById('root')}>
+//           <ProfileEditForm
+//               setIsEditFormVisible={setIsEditFormVisible}
+//               fn={user.profile.first_name}
+//               ln={user.profile.last_name}
+//               b={user.profile.bio}
+//               imageUrl={user.profile.featured_image.url}
+//           />
+//       </Modal>
+//   </div>
+// )
