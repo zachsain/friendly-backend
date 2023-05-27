@@ -2,46 +2,38 @@ import React, { useState, useEffect, useContext} from 'react'
 import TinderCard from 'react-tinder-card'
 import AppContext from './AppContext'
 // import { Spring } from 'react-spring/web'
-import './TinderCards.css'
+import './Cards.css'
 
 function Card() {
-    const [people, setPeople] = useState([])
+    const [profiles, setProfiles] = useState([])
     const user = useContext(AppContext);
 
     useEffect(() => {
-      // const unsubscribe = db.collection('people').onSnapshot(snapshot => {
-      //   const p = snapshot.docs.map(doc => doc.data());
-      //   setPeople(p);
-      // });
-
-      // return () => {
-      //   unsubscribe()
-      // }
-      // when component mounts this use effect creates a listener 
-      // as the user swipes through the collection changes 
-      // we need to unsubscribe after each swipe so we don't have 100's 
-      // of listeners 
-      // this is called a cleanup function ^^
+      fetch('/profiles')
+      .then(r => r.json())
+      .then((p) => setProfiles(p))
     }, []);
 
-    if (!Array.isArray(user) || user === null) {
-      return null; // Or display a loading message
-    }
+    console.log(profiles)
 
+    // if (!Array.isArray(user) || user === null) {
+    //   return null; 
+    // }
+   
   return (
     <div className="card-container"> 
         <div className="tinderCards__cardContainer">
-          {user.map(person => {
+          {profiles.map(p => {
             return <TinderCard
                     className="swipe"
-                    key= {person.name}
-                    // preventSwipe={['up', 'down']}
+                    key= {p.name}
+                    preventSwipe={['up', 'down']}
                   >
                   <div 
-                      style={{ backgroundImage: `url(${person.url})`}}
+                      style={{ backgroundImage: `url(${p.featured_image.url})`}}
                       className="card"
                   >
-                  <h3>{person.name}</h3>
+                  <h3>{p.first_name}</h3>
                   </div>
             </TinderCard>
           })}

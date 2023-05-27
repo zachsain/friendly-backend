@@ -31,7 +31,7 @@ function UserProfile() {
         <div onClick={handleEditClick} className="userProfile">
         <div className="userProfile__image-container">
           <img className="userProfile__image" src={user.profile.featured_image.url} alt="profile-photo" />
-          <h1 className="userProfile__h1">{user.profile.first_name} {age}</h1>
+          <h1 className="userProfile__h1">{user.profile.first_name}, {age}</h1>
         </div>
         <p className="userProfile__p">{user.profile.bio}</p>
         </div>

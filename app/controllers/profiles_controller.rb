@@ -2,6 +2,11 @@ class ProfilesController < ApplicationController
     before_action :authorize, only: [:update]
     rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_data
   
+    def index 
+        profiles = Profile.all
+        render json: profiles
+    end
+
     def update
       user = User.find(session[:user_id])
       profile = user.profile
@@ -13,6 +18,8 @@ class ProfilesController < ApplicationController
       profile.update!(profile_params.except(:featured_image))
       render json: user
     end
+
+     
   
     private
   

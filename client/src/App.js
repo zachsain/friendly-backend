@@ -7,12 +7,10 @@ import Card from './Card';
 import SwipeButtons from './SwipeButtons';
 import Chats from './Chats';
 import ChatScreen from './ChatScreen';
-import SignupForm from './SignupForm';
-import CreateProfile from './CreateProfile';
 import UserProfile from './UserProfile';
 import Login from './Login';
 import AppContext from './AppContext';
-
+import SwipeDeck from './SwipeDeck';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -59,10 +57,12 @@ function App() {
         </Route>
         <Route exact path="/">
             {user ? (
-              <>
-                <Card />
-                <SwipeButtons />
-              </>
+              <div>
+                {/* <Card /> */}
+                <SwipeDeck />
+
+                {/* <SwipeButtons /> */}
+              </div>
             ) : (
               <Login setUser={setUser} />
             )}
