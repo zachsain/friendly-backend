@@ -52,11 +52,8 @@
     align-items: center;
     margin: 0 auto;
     padding: 30px;
-    position: absolute;
+    /* position: absolute; */
     text-align: center;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-    cursor: grab;
     overflow: hidden;
     will-change: transform;
     transition: all 0.3s ease-in-out;

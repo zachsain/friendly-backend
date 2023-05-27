@@ -11,6 +11,12 @@
     transform: translateX(-50%) translateY(-50%);
   }
 
+  .container{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
 /* .tinderCards__cardContainer{
     position: relative;
     justify-content: center;
@@ -23,7 +29,4 @@
     color: white;
 } */
 
-.swipe{
-    /* position: absolute; */
-}
 

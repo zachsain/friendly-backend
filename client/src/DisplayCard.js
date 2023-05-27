@@ -9,10 +9,11 @@ import './DisplayCard.css';
 // import './Cards.css';
 
 
-function DisplayCard({name, dob, image}) {
+function DisplayCard({name, dob, image, currentIndex, cardIndex, swipeContainerRef}) {
     const { user } = useContext(AppContext);
 
 
+    
     function calculateAge(dateOfBirth) {
         const dob = new Date(dateOfBirth);
         const diffInMs = Date.now() - dob.getTime();
@@ -20,14 +21,18 @@ function DisplayCard({name, dob, image}) {
         return Math.abs(ageDate.getUTCFullYear() - 1970);
       }
       
-      const age = calculateAge(dob);
+    const age = calculateAge(dob);
 
     function handleEditClick(){
      
     }
 
+    const cardStyle = {
+        transform: `translateX(${(cardIndex - currentIndex) * 100}%)`,
+      };
+
     return (
-        <div className="tinder--card">
+        <div className="tinder--card" >
           <div onClick={handleEditClick} className="displayCard">
             <div className="displayCard__image-container">
               <img className="tinder--card-img" src={image} alt="profile-photo" />

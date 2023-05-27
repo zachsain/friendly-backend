@@ -58,8 +58,8 @@ function App() {
         <Route exact path="/">
             {user ? (
               <div>
-                {/* <Card /> */}
-                <SwipeDeck />
+                <Card />
+                {/* <SwipeDeck /> */}
 
                 {/* <SwipeButtons /> */}
               </div>
