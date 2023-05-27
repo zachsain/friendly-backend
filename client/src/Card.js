@@ -5,7 +5,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './Cards.css';
 import './DisplayCard.css';
-import './SwipeButtons.css'
 
 function Card() {
   const [profiles, setProfiles] = useState([]);
@@ -20,12 +19,17 @@ function Card() {
 
   function handleSwipeRight() {
     console.log('Swiped Right');
-    tinderCardRef.current.swipe('right'); // Swipe the card to the right
+    tinderCardRef.current.swipe('right');
   }
 
   function handleSwipeLeft() {
     console.log('Disliked');
-    tinderCardRef.current.swipe('left'); // Swipe the card to the left
+    tinderCardRef.current.swipe('left');
+  }
+
+  function handleCardLeftScreen(id) {
+    setProfiles((prevProfiles) => prevProfiles.filter((p) => p.id !== id));
+    console.log(id)
   }
 
   return (
@@ -36,6 +40,7 @@ function Card() {
           key={p.name}
           preventSwipe={['up', 'down']}
           ref={tinderCardRef}
+          onCardLeftScreen={() => handleCardLeftScreen(p.id)}
         >
           <div className="tinder--cards">
             <div className="tinder--card">
@@ -70,7 +75,7 @@ function Card() {
             <FavoriteIcon fontSize="large" />
           </button>
         </div>
-
+   
     </div>
   );
 }
