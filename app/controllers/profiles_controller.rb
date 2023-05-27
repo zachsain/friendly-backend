@@ -1,18 +1,23 @@
 class ProfilesController < ApplicationController
-    before_action :authorize, only: [:show]
-    rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found
-
+    before_action :authorize, only: [:update]
+    rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_data
+  
     def update
-        user = User.find(params[:user_id])
-        profile = user.profile.update!(profile_params)
-        render json: profile 
-    end 
-
-    private 
-    
-    def profile_params 
-        params.permit(:first_name, :last_name, :bio, :featured_image, :user_id)
-    end 
-    
-end
-
+      user = User.find(session[:user_id])
+      profile = user.profile
+  
+      if profile_params[:featured_image].present?
+        profile.featured_image.attach(profile_params[:featured_image])
+      end
+  
+      profile.update!(profile_params.except(:featured_image))
+      render json: user
+    end
+  
+    private
+  
+    def profile_params
+      params.permit(:first_name, :last_name, :bio, :featured_image, :user_id)
+    end
+  end
+  

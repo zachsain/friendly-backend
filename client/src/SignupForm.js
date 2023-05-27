@@ -55,6 +55,7 @@ function SignupForm({ setLoginOrSignup, setUser }) {
 
   function onImageChange(e){
     setImage(e.target.files[0]);
+    
 }
 
   function handleGenderChange(e){

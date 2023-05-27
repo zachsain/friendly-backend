@@ -1,112 +1,71 @@
+
 .userProfile {
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-    text-align: center;
-    width: 90%;
-    max-width: 80vw;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-  }
-  
-  @media (max-width: 768px) {
-    .userProfile {
-        height: auto;
-        width: 100%;
-        margin: 0;
-    }
-  }
-  /* @media (max-width: 768px) {
-    .userProfile {
-      height: 80vh;
-      max-height: 800px;
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-    }
-  } */
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 30px;
+  position: relative;
+  text-align: center;
+  width: 90%;
+  max-width: 600px; /* Adjust the value to your desired width */
+  height: 600px; /* Set a fixed height to accommodate the larger image size */
+  margin-top: 1.5vh;
+  margin-bottom: 1.5vh;
+}
 
+.userProfile img {
+  border-radius: 20px;
+  height: 600px; /* Adjust the height to make the image bigger */
+  width: 400px; /* Adjust the width to maintain the aspect ratio */
+  margin-bottom: 20px; /* Adjust the margin to control the space below the image */
+  object-fit: contain;
+  position: relative;
+  /* padding-top: 100px; */
+}
+
+
+@media (max-width: 768px) {
   .userProfile img {
-    border-radius: 20px;
-    height: 400px;
-    margin: 30px 0;
-    width: 300px;
-    object-fit: contain;
-  }
-  
-  @media (max-width: 768px) {
-    .userProfile img {
-      height: 200px;
-      width: 200px;
-    }
-  }
-  
-  .userProfile h1 {
-    font-size: 24px;
-    margin: 10px 0;
-  }
-  
-  .userProfile p {
-    font-size: 18px;
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
-  }
-/*   
-  .userProfile::before {
-    border-radius: 20px;
-    content: "";
-    height: 10px;
-    position: absolute;
-    top: 0;
+    height: 350px;
     width: 100%;
-  } */
- 
-  .edit-icon-container {
-    position: absolute;
-    bottom: 10px;
-    right: 1px;
   }
-  
-  .edit-icon {
-    font-size: 50px;
-    color: #555;
-  }
-  
-
-  /* .card{
-    position: relative;
-    width: 600px;
-    padding: 20px;
-    max-width: 85vw;
-    height: 50vh;
-    border-radius: 20px;
-    background-size: cover;
-    background-size: center;
-    box-shadow: 0px 18px 53px 0px rgb(94, 92, 92)
 }
 
-.tinderCards__cardContainer{
-    display: flex; 
-    justify-content: center;
-    margin-top: 5vh;
+.image-h1-container{
+  position: relative;
+  text-align: center;
+  margin: -70px;
 }
 
-.card > h3 {
-    position: absolute;
-    bottom: 10px;
-    color: white;
+.userProfile h1 {
+  position: absolute;
+  bottom: 130px;
+  left: 16px;
+  color: rgb(248, 11, 11);
 }
 
-.swipe{
-    position: absolute;
-} */
+
+.userProfile p {
+  font-size: 18px;
+  margin-bottom: 20px; /* Adjust the margin to control the space below the paragraph */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+}
+
+.edit-icon-container {
+  position: absolute;
+  bottom: 10px;
+  right: 1px;
+}
+
+.edit-icon {
+  font-size: 50px;
+  color: #555;
+}

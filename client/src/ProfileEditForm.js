@@ -2,54 +2,72 @@ import React, { useState, useContext } from 'react';
 import AppContext from './AppContext';
 import {useHistory} from "react-router-dom";
 import './ProfileEditForm.css'
+import { imageListClasses } from '@mui/material';
 
-function ProfileEditForm({fn, ln, b, imageUrl}) {
-
-  const [firstName, setFirstName] = useState(fn);
-  const [lastName, setLastName] = useState(ln);
-  const [errors, setErrors] = useState('');
-  const [bio, setBio] = useState(b);
-  const [image, setImage] = useState(imageUrl);
-  const history = useHistory();
+function ProfileEditForm({imageUrl, setIsEditFormVisible}) {
   const {user, setUser} = useContext(AppContext);
+  const [firstName, setFirstName] = useState(user.profile.first_name);
+  const [lastName, setLastName] = useState(user.profile.last_name);
+  const [errors, setErrors] = useState('');
+  const [bio, setBio] = useState(user.profile.bio);
+  const [image, setImage] = useState(user.profile.featured_image.url);
+  const [displayImage, setDisplayImage] = useState(user.profile.featured_image.url);
+  const history = useHistory();
+  
+  console.log(image)
 
-  function handleEdit(e){
+  function handleEdit(e) {
     e.preventDefault();
     setErrors([]);
-
+  
     const formData = new FormData();
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("bio", bio);
-    formData.append("featured_image", image);
-
+    formData.append('first_name', firstName);
+    formData.append('last_name', lastName);
+    formData.append('bio', bio);
+  
+    // Check if image has changed
+    if (image && image !== imageUrl) {
+      formData.append('featured_image', image);
+    }
+  
     fetch(`/users/${user.id}/profile`, {
       method: 'PATCH',
-      body: formData
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((user) => {
-          setUser(user);
-          console.log(user);
-          // history.push('/')
-        });
-      } else {
-        r.json().then((error) => {
-          setErrors(error.error);
-        });
-      }
-    });
-
+      body: formData,
+    })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((user) => {
+            setUser(user);
+            console.log(user);
+            setIsEditFormVisible(false)
+            // history.push('/')
+          });
+        } else {
+          r.json().then((error) => {
+            setErrors(error.error);
+          });
+        }
+      });
   }
+  
 
-  function onImageChange(e){
-    setImage(e.target.files[0]);
+//   function onImageChange(e){
+//     console.log(e.target.files[0])
+//     setImage(e.target.files[0]);
+//     setDisplayImage(e.target.files[0])
+// }
+
+function onImageChange(e) {
+  const file = e.target.files[0];
+  if (file) {
+    setImage(file);
+    setDisplayImage(URL.createObjectURL(file));
+  }
 }
-
   return (
     <div className="edit-form-container">
         <form className="edit-form" >
-        <h2 className="edit-heading">Edit</h2>
+        {/* <h2 className="edit-heading">Edit Profile:</h2> */}
         <input
           type="text"
           placeholder="First Name"
@@ -64,15 +82,23 @@ function ProfileEditForm({fn, ln, b, imageUrl}) {
           onChange={(event) => setLastName(event.target.value)}
           className="edit-input"
         />
-          <input
-          type="bio"
+        <textarea
           placeholder="Bio"
           value={bio}
           onChange={(event) => setBio(event.target.value)}
           className="edit-input"
-        />
+          id="bio"
+        ></textarea>
 
-        <input className="image-field" type="file" accept="image/*" multiple={false} onChange={onImageChange} />
+        {/* <input className="image-field" type="file" accept="image/*" multiple={false} onChange={onImageChange} /> */}
+        <input
+          className="image-field"
+          type="file"
+          accept="image/*"
+          multiple={false}
+          onChange={onImageChange}
+        />
+        <img className="userEdit__image" src={displayImage} alt="profile-photo" />
 
         <button type="submit" className="edit-submit-button" onClick={handleEdit}>
           Update

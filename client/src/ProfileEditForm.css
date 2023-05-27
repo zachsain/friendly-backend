@@ -1,30 +1,35 @@
 .edit-form-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background-color: rgba(239, 232, 232, 0.5); */
-}
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: transparent;
+     /* margin-bottom: -30px; */
+     margin: -30px;
+     padding: -30px;
+  }
   
   .edit-form {
-    /* background-color: #fff; */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    background-color: transparent;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+    padding: 40px;
     width: 400px;
     max-width: 90%;
+    padding: -50px;
+    margin: -15px;
+    /* margin-top: -30px; */
   }
   
   .edit-heading {
     font-size: 24px;
     margin-bottom: 20px;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+    font-size: xx-large;
+
   }
-  
+
   .edit-input {
     width: 100%;
     padding: 10px;
@@ -33,34 +38,37 @@
     border-radius: 4px;
   }
   
+  #bio {
+    height: px;
+  }
+  
   .image-field {
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  .userEdit__image {
+    border-radius: 20px;
+    height: 350px;
+    width: 100%;
+    object-fit: contain;
     margin-bottom: 20px;
   }
   
   .edit-submit-button {
-    background-color: #007bff;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #34f186;
     color: #fff;
     border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
+    border-radius: 10px;
     cursor: pointer;
+    font-size: 16px;
   }
   
   .signup-error {
     color: red;
     margin-top: 10px;
   }
-  
-  /* Additional styling for a sleeker look */
-  
-  .edit-form-container:before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));  */
-  }
-  
   
