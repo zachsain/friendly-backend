@@ -32,6 +32,15 @@ function Card() {
     console.log(id)
   }
 
+  // function calculateAge(dateOfBirth) {
+  //   const dob = new Date(dateOfBirth);
+  //   const diffInMs = Date.now() - dob.getTime();
+  //   const ageDate = new Date(diffInMs);
+  //   return Math.abs(ageDate.getUTCFullYear() - 1970);
+  // }
+
+  // const age = calculateAge(dob);
+
   return (
     <div className="tinderCards__cardContainer">
       {profiles.map((p) => (
@@ -42,13 +51,15 @@ function Card() {
           ref={tinderCardRef}
           onCardLeftScreen={() => handleCardLeftScreen(p.id)}
         >
+
+
           <div className="tinder--cards">
             <div className="tinder--card">
               <div className="displayCard">
                 <div className="displayCard__image-container">
                   <img className="tinder--card-img" src={p.featured_image.url} alt="profile-photo" />
                   <h1 className="dislpayCard__h1">
-                    {p.name}
+                    {p.first_name} 
                   </h1>
                 </div>
               </div>
