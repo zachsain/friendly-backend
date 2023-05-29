@@ -3,13 +3,17 @@ import TinderCard from 'react-tinder-card';
 import AppContext from './AppContext';
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import SwipeButtons from './SwipeButtons';
 import './Cards.css';
 import './DisplayCard.css';
 
 function Card() {
   const [profiles, setProfiles] = useState([]);
+  const [errors, setErrors] = useState("")
+  const [swipeeId, setSwipeeId] = useState(0)
   const user = useContext(AppContext);
   const tinderCardRef = useRef(null);
+  console.log(profiles)
 
   useEffect(() => {
     fetch('/profiles')
@@ -17,42 +21,61 @@ function Card() {
       .then((p) => setProfiles(p));
   }, []);
 
-  function handleSwipeRight() {
-    console.log('Swiped Right');
+  function handleSwipeRight(swipeeId) {
+    console.log('right');
     tinderCardRef.current.swipe('right');
+    console.log(swipeeId)
+    // fetch("/swipes", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     swiper_id: user.id,
+    //     swipee_id: 
+      
+    //   }),
+    // }).then((r) => {
+    //   if (r.ok) {
+
+    //     r.json().then((a) =>{
+    //     })
+       
+    //   } else {
+    //     r.json().then((err) => setErrors(err.errors));
+    //   }
+    // });
+
   }
 
-  function handleSwipeLeft() {
-    console.log('Disliked');
+  function handleSwipeLeft(swipeeId) {
+    console.log('left');
+    console.log(swipeeId)
     tinderCardRef.current.swipe('left');
   }
 
+
   function handleCardLeftScreen(id) {
-    setProfiles((prevProfiles) => prevProfiles.filter((p) => p.id !== id));
+    setSwipeeId(id)
+    setProfiles((prevProfiles) => prevProfiles.filter((p) => p.user_id !== id));
     console.log(id)
+
   }
 
-  // function calculateAge(dateOfBirth) {
-  //   const dob = new Date(dateOfBirth);
-  //   const diffInMs = Date.now() - dob.getTime();
-  //   const ageDate = new Date(diffInMs);
-  //   return Math.abs(ageDate.getUTCFullYear() - 1970);
+  // function onRender(id){
+  //   setSwipeeId(id)
   // }
-
-  // const age = calculateAge(dob);
 
   return (
     <div className="tinderCards__cardContainer">
       {profiles.map((p) => (
         <TinderCard
           className="swipe"
-          key={p.name}
+          key={p.id}
           preventSwipe={['up', 'down']}
           ref={tinderCardRef}
-          onCardLeftScreen={() => handleCardLeftScreen(p.id)}
+          onCardLeftScreen={() => handleCardLeftScreen(p.user_id)}
         >
-
-
           <div className="tinder--cards">
             <div className="tinder--card">
               <div className="displayCard">
@@ -65,28 +88,17 @@ function Card() {
               </div>
             </div>
           </div>
+
+          <div className="swipeButtons-conatiner">
+            <SwipeButtons
+              onSwipeLeft={() => handleSwipeLeft(p.user_id)}
+              onSwipeRight={() => handleSwipeRight(p.user_id)}
+            />
+          </div>
+
         </TinderCard>
-      ))}
-
-
-        <div className="swipeButtons">
-          <button
-            id="nope"
-            className="swipeButtons__left"
-            onClick={handleSwipeLeft}
-          >
-            <CloseIcon fontSize="large" />
-          </button>
-
-          <button
-            id="love"
-            className="swipeButtons__right"
-            onClick={handleSwipeRight}
-          >
-            <FavoriteIcon fontSize="large" />
-          </button>
-        </div>
-   
+        
+      ))}   
     </div>
   );
 }

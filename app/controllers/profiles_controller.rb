@@ -1,9 +1,10 @@
 class ProfilesController < ApplicationController
-    before_action :authorize, only: [:update]
+    before_action :authorize, only: [:update, :index]
     rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_data
   
     def index 
-        profiles = Profile.all
+        swiped_profile_ids = Swipe.where(swiper_id: session[:user_id]).pluck(:swipee_id)
+        profiles = Profile.where.not(user_id: session[:user_id]).where.not(id: swiped_profile_ids)
         render json: profiles
     end
 

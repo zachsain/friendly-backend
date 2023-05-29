@@ -1,34 +1,22 @@
 import React from 'react'
 import './SwipeButtons.css'
-import ReplayIcon from '@mui/icons-material/Replay';
+import './Cards.css'
 import CloseIcon from '@mui/icons-material/Close';
-import StarRateIcon from '@mui/icons-material/StarRate';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FlashOnIcon from '@mui/icons-material/FlashOn';
+
 import { IconButton }  from '@mui/material';
 
-function SwipeButtons() {
+function SwipeButtons({ onSwipeLeft, onSwipeRight }) {
   return (
     <div className="swipeButtons">
-
-       <IconButton className="swipeButtons__repeat">
-         <ReplayIcon fontSize="large" />
-       </IconButton>
-       <IconButton className="swipeButtons__left">
-          <CloseIcon fontSize="large" />
-        </IconButton>
-        <IconButton className="swipeButtons__star">
-          <StarRateIcon fontSize="large" />
-        </IconButton>
-        <IconButton className="swipeButtons__right">
-          <FavoriteIcon fontSize="large" />
-        </IconButton>
-        <IconButton className="swipeButtons__star">
-          <FlashOnIcon ontSize="large" />
-        </IconButton>
-    
+      <button id="nope" className="swipeButtons__left" onClick={onSwipeLeft}>
+        <CloseIcon fontSize="large" />
+      </button>
+      <button id="love" className="swipeButtons__right" onClick={onSwipeRight}>
+        <FavoriteIcon fontSize="large" />
+      </button>
     </div>
-  )
+  );
 }
 
 export default SwipeButtons
