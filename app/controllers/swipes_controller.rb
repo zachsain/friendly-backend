@@ -12,9 +12,9 @@ class SwipesController < ApplicationController
           match: matching_swipe.present?
         }
       
-        render json: response_data
+        render json: swipe
       end
-      
+
     private 
   
     def swipe_params

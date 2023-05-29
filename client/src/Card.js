@@ -21,37 +21,59 @@ function Card() {
       .then((p) => setProfiles(p));
   }, []);
 
-  function handleSwipeRight(swipeeId) {
+  function handleSwipeRight(id) {
     console.log('right');
     tinderCardRef.current.swipe('right');
-    console.log(swipeeId)
-    // fetch("/swipes", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     swiper_id: user.id,
-    //     swipee_id: 
-      
-    //   }),
-    // }).then((r) => {
-    //   if (r.ok) {
+    console.log(id)
 
-    //     r.json().then((a) =>{
-    //     })
-       
-    //   } else {
-    //     r.json().then((err) => setErrors(err.errors));
-    //   }
-    // });
+    fetch("/swipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        swipee_id: id,
+        swiper_id: user.id,
+        direction: "right"
+      
+      }),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((s) =>{
+          console.log(s)
+        })   
+      } else {
+        r.json().then((err) => (console.log(err), setErrors(err.errors)));
+      }
+    });
 
   }
 
-  function handleSwipeLeft(swipeeId) {
+  function handleSwipeLeft(id) {
     console.log('left');
     console.log(swipeeId)
     tinderCardRef.current.swipe('left');
+
+    fetch("/swipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        swipee_id: id,
+        swiper_id: user.id,
+        direction: "left"
+      
+      }),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((s) =>{
+          console.log(s)
+        })   
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
   }
 
 
@@ -61,10 +83,6 @@ function Card() {
     console.log(id)
 
   }
-
-  // function onRender(id){
-  //   setSwipeeId(id)
-  // }
 
   return (
     <div className="tinderCards__cardContainer">

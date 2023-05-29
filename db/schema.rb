@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_172216) do
   create_table "swipes", force: :cascade do |t|
     t.bigint "swiper_id", null: false
     t.bigint "swipee_id", null: false
-    t.boolean "direction"
+    t.string "direction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["swipee_id"], name: "index_swipes_on_swipee_id"
