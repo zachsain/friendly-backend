@@ -5,7 +5,7 @@ import Header from './Header';
 import { Switch, Route } from "react-router-dom";
 import Card from './Card';
 import SwipeButtons from './SwipeButtons';
-import Chats from './Chats';
+import Chats from './ChatPage';
 import ChatScreen from './ChatScreen';
 import UserProfile from './UserProfile';
 import Login from './Login';
@@ -14,12 +14,13 @@ import SwipeDeck from './SwipeDeck';
 
 function App() {
   const [user, setUser] = useState(null)
+  const [matches, setMatches] = useState(null)
 
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => (setUser(user), console.log(user)));
+        r.json().then((user) => (setUser(user.user), setMatches(user.matched_with), console.log(user)));
    
       }
     });
@@ -43,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-    <AppContext.Provider value={{user, setUser}}>
+    <AppContext.Provider value={{user, setUser, matches, setMatches}}>
     <Header /> 
       <Switch>
       <Route path = "/chat/:person">

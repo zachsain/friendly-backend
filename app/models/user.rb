@@ -5,9 +5,13 @@ class User < ApplicationRecord
     has_many :messages, dependent: :destroy
     has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, dependent: :destroy
     has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, dependent: :destroy
-    has_many :matches, foreign_key: :user1_id
-    has_many :reverse_matches, foreign_key: :user2_id, class_name: 'Match'
+    has_many :matches_as_user1, class_name: 'Match', foreign_key: :user1_id
+    has_many :matches_as_user2, class_name: 'Match', foreign_key: :user2_id
     has_secure_password
+
+    def matches
+        matches_as_user1.or(matches_as_user2)
+    end
   
     validates :email, presence: true, uniqueness: true
     validates :username, presence: true, uniqueness: true

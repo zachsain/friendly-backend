@@ -11,7 +11,7 @@ function Card() {
   const [profiles, setProfiles] = useState([]);
   const [errors, setErrors] = useState("")
   const [swipeeId, setSwipeeId] = useState(0)
-  const user = useContext(AppContext);
+  const {user, setUser} = useContext(AppContext);
   const tinderCardRef = useRef(null);
   console.log(profiles)
 

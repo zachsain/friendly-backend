@@ -12,7 +12,7 @@ class SwipesController < ApplicationController
           match: matching_swipe.present?
         }
       
-        render json: swipe
+        render json: user
       end
 
     private 
