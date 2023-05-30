@@ -4,4 +4,10 @@ class UserSerializer < ActiveModel::Serializer
   has_one :profile 
   has_many :matches
   has_many :swipes
+  has_many :messages, through: :matches # Include messages association
+
+  def messages
+    object.matches.flat_map(&:messages)
+  end
+
 end

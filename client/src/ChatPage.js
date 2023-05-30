@@ -9,12 +9,13 @@ function ChatPage() {
   console.log(matches)
 
   const box = matches
-  ? matches.map((p) => (
+  ? matches.reverse().map((p) => (
       <ChatBox
         name={p.profile.first_name}
         message="Hey! How are you?"
         timestamp="35 minutes ago"
         profilePic={p.profile.featured_image.url}
+        id={p.id}
       />
     ))
   : null;

@@ -11,9 +11,8 @@ function Card() {
   const [profiles, setProfiles] = useState([]);
   const [errors, setErrors] = useState("")
   const [swipeeId, setSwipeeId] = useState(0)
-  const {user, setUser} = useContext(AppContext);
+  const {user, setUser, matches, setMatches} = useContext(AppContext);
   const tinderCardRef = useRef(null);
-  console.log(profiles)
 
   useEffect(() => {
     fetch('/profiles')
@@ -39,8 +38,13 @@ function Card() {
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((s) =>{
-          console.log(s)
+        r.json().then((obj) =>{
+          console.log(obj)
+          if (obj.match) {
+            let previous = matches 
+            let updatedMatches = [...previous, obj.user]
+            setMatches(updatedMatches)
+          }
         })   
       } else {
         r.json().then((err) => (console.log(err), setErrors(err.errors)));
@@ -51,7 +55,6 @@ function Card() {
 
   function handleSwipeLeft(id) {
     console.log('left');
-    console.log(swipeeId)
     tinderCardRef.current.swipe('left');
 
     fetch("/swipes", {
@@ -65,14 +68,8 @@ function Card() {
         direction: "left"
       
       }),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((s) =>{
-          console.log(s)
-        })   
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
+    }).catch((err) => {
+      setErrors(err.errors);
     });
   }
 

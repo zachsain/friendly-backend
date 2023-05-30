@@ -26,7 +26,10 @@ class UsersController < ApplicationController
         UserSerializer.new(user, include: :profile)
       end
 
-    render json: { user: UserSerializer.new(current_user), matched_with: serialized_matched_users }
+    render json: {
+       user: UserSerializer.new(current_user), 
+       matched_with: serialized_matched_users
+      }
     end
 
 
@@ -35,18 +38,7 @@ class UsersController < ApplicationController
     def user_params
         params.permit(:username, :password, :email)
     end
-
-    # def fetch_matched_users(user)
-    #   user_matches = user.matches
-    #   matched_users = []
-    #   user_matches.each do |match|
-    #     matched_user_id = match.user1_id == user.id ? match.user2_id : match.user1_id
-    #     matched_user = User.find(matched_user_id)
-    #     matched_users << matched_user
-    #   end
-    #   matched_users
-    # end
-    
+  
     def fetch_matched_users(user)
       user_matches = user.matches
       matched_user_ids = user_matches.pluck(:user1_id, :user2_id).flatten.uniq - [user.id]

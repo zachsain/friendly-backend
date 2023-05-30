@@ -1,8 +1,14 @@
-import React,{ useState } from 'react'
+import React,{ useState, useContext } from 'react'
 import { Avatar } from '@mui/material'
+import AppContext from './AppContext';
 import "./ChatScreen.css"
 
 function ChatScreen() {
+
+    const [messageContent, setMessageContent] = useState("")
+    const {user, setUser, matches, setMatches} = useContext(AppContext);
+    
+
     const [messages, setMessages] = useState([{
         name: "Ellen",
         image: 
@@ -19,6 +25,40 @@ function ChatScreen() {
         message: "going good"
     }, 
 ])
+    function handleSendMessage(e){
+        e.preventDefault()
+        console.log(e.target.value)
+        console.log(messageContent)
+
+        // fetch("/messages", {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       sender_id: id,
+        //       receiver_id: user.id,
+        //       match_id: "right",
+        //       content: ""
+            
+        //     }),
+        //   }).then((r) => {
+        //     if (r.ok) {
+        //       r.json().then((obj) =>{
+        //         console.log(obj)
+        //         if (obj.match) {
+        //           let previous = matches 
+        //           let updatedMatches = [...previous, obj.user]
+        //           setMatches(updatedMatches)
+        //         }
+        //       })   
+        //     } else {
+        //       r.json().then((err) => (console.log(err)));
+        //     }
+        //   });
+     
+    }
+
   return (
     <div className="chatScreen">
         <p className="chatScreen__timestamp"> YOU MATCHED WITH ELLEN ON 10/20/88 </p>
@@ -38,8 +78,14 @@ function ChatScreen() {
         ))}
     
         <form className="chatScreen__input">
-            <input className="chatScreen__inputField" type="text" placeholder="Type a message"/>
-            <button className="chatSreen__inputButton">SEND</button>
+            <input 
+                className="chatScreen__inputField" 
+                value={messageContent}  
+                onChange={(event) => setMessageContent(event.target.value)}
+                type="text" 
+                placeholder="Type a message"
+            />
+            <button onClick={handleSendMessage} className="chatSreen__inputButton">SEND</button>
         </form>
     </div>
   )

@@ -3,7 +3,7 @@ import { Avatar } from '@mui/material'
 import { Link } from 'react-router-dom'
 import "./ChatBox.css"
 
-function Chat({name, message, profilePic, timestamp}) {
+function Chat({name, message, profilePic, timestamp, id}) {
   return (
     <Link to={`/chat/${name}`}>
     <div className="chat">

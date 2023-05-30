@@ -12,6 +12,10 @@ class User < ApplicationRecord
     def matches
         matches_as_user1.or(matches_as_user2)
     end
+
+    def messages_for_match(match_id)
+        messages.where(match_id: match_id)
+    end
   
     validates :email, presence: true, uniqueness: true
     validates :username, presence: true, uniqueness: true
