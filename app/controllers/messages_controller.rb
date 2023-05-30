@@ -1,9 +1,10 @@
 class MessagesController < ApplicationController
     before_action :authorize, only: [:create]
-    
+
     def create 
-        user = User.find(session[:user_id])
-        message = user.message.create(message_params)
+        match = Match.find(params[:match_id])
+        message = match.messages.create(message_params)
+        render json: match
     end 
 
     private 

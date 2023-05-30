@@ -1,4 +1,5 @@
-import React,{ useState, useContext } from 'react'
+import React,{ useState, useContext, useEffect} from 'react'
+import { useParams } from 'react-router-dom';
 import { Avatar } from '@mui/material'
 import AppContext from './AppContext';
 import "./ChatScreen.css"
@@ -6,9 +7,35 @@ import "./ChatScreen.css"
 function ChatScreen() {
 
     const [messageContent, setMessageContent] = useState("")
-    const {user, setUser, matches, setMatches} = useContext(AppContext);
-    
+    const {user, setUser, matches, setMatches, isLoaded} = useContext(AppContext);
+    const [profile, setProfile] = useState([])
+    const [matchId, setMatchId] = useState(0)
+    const { id } = useParams()
+    // console.log(id)
+    // console.log(matches)
 
+    useEffect(() => {
+        if (isLoaded && matches) {
+          // Perform any necessary operations with matches data
+          let userProfile = matches.find((m) => m.id === parseInt(id));
+          let match_id = user && user.matches.find(
+            (m) =>
+              (m.user1_id === parseInt(id) || m.user1_id === user.id) &&
+              (m.user2_id === parseInt(id) || m.user2_id === user.id)
+          );
+
+          setMatchId(match_id.id)
+        //   console.log(match_id.id);
+        //   console.log(userProfile);
+          setProfile(userProfile)
+        }
+      }, [isLoaded, matches, id, user]);
+
+      console.log(matchId)
+      console.log(id)
+      console.log(user)
+      console.log(profile)
+ 
     const [messages, setMessages] = useState([{
         name: "Ellen",
         image: 
@@ -30,42 +57,42 @@ function ChatScreen() {
         console.log(e.target.value)
         console.log(messageContent)
 
-        // fetch("/messages", {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       sender_id: id,
-        //       receiver_id: user.id,
-        //       match_id: "right",
-        //       content: ""
-            
-        //     }),
-        //   }).then((r) => {
-        //     if (r.ok) {
-        //       r.json().then((obj) =>{
-        //         console.log(obj)
-        //         if (obj.match) {
-        //           let previous = matches 
-        //           let updatedMatches = [...previous, obj.user]
-        //           setMatches(updatedMatches)
-        //         }
-        //       })   
-        //     } else {
-        //       r.json().then((err) => (console.log(err)));
-        //     }
-        //   });
+        fetch("/messages", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              sender_id: user.id,
+              receiver_id: parseInt(id),
+              match_id: matchId,
+              content: messageContent 
+            }),
+          }).then((r) => {
+            if (r.ok) {
+              r.json().then((obj) =>{
+                console.log(obj)
+              })   
+            } else {
+              r.json().then((err) => (console.log(err)));
+            }
+          });
      
     }
+
+      if (!isLoaded || !matches) return <h1>Loading...</h1>;
 
   return (
     <div className="chatScreen">
         <p className="chatScreen__timestamp"> YOU MATCHED WITH ELLEN ON 10/20/88 </p>
-        {messages.map((m) => (
+        {/* {messages.map((m) => (
             m.name ? (  
                 <div className="chatScreen__message"> 
-                    <Avatar className="chat__image" alt={m.name} src={m.image} />
+                    <Avatar 
+                        className="chat__image" 
+                        alt={m.name} 
+                        src={profile.profile.featured_image.url} 
+                    />
                     <p className="chatScreen__text">{m.message}</p>
                 </div>) 
             : 
@@ -75,7 +102,7 @@ function ChatScreen() {
                 </div>
             )
           
-        ))}
+        ))} */}
     
         <form className="chatScreen__input">
             <input 

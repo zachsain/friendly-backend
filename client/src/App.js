@@ -15,12 +15,18 @@ import SwipeDeck from './SwipeDeck';
 function App() {
   const [user, setUser] = useState(null)
   const [matches, setMatches] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => (setUser(user.user), setMatches(user.matched_with), console.log(user)));
+        r.json().then((user) => (
+          setUser(user.user), 
+          setMatches(user.matched_with), 
+          console.log(user), 
+          setIsLoaded(true)
+          ));
    
       }
     });
@@ -45,10 +51,10 @@ function App() {
 
   return (
     <div className="App">
-    <AppContext.Provider value={{user, setUser, matches, setMatches}}>
+    <AppContext.Provider value={{user, setUser, matches, setMatches, isLoaded, setIsLoaded}}>
     <Header /> 
       <Switch>
-      <Route path = "/chat/:person">
+      <Route path = "/chat/:id">
           <ChatScreen />
         </Route>
         <Route path = "/chat">

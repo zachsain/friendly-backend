@@ -20,6 +20,8 @@ function ChatPage() {
     ))
   : null;
 
+  
+
   return (
     <div className="chats">
         {box}

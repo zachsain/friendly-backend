@@ -5,7 +5,7 @@ import "./ChatBox.css"
 
 function Chat({name, message, profilePic, timestamp, id}) {
   return (
-    <Link to={`/chat/${name}`}>
+    <Link to={`/chat/${id}`}>
     <div className="chat">
         <Avatar className="chat__image" alt={name} src={profilePic} />
         <div className="chat__details">
