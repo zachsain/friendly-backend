@@ -16,6 +16,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [matches, setMatches] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [ chatPageRender, setChatPageRender ] = useState(false)
 
   useEffect(() => {
     // auto-login
@@ -30,7 +31,16 @@ function App() {
    
       }
     });
-  } , []);
+  } , [chatPageRender]);
+
+
+  useEffect(() => {
+    if (isLoaded && chatPageRender) {
+      console.log("Updating logic when chatPageRender changes");
+      setChatPageRender(false); 
+    }
+  }, [isLoaded, chatPageRender]);
+
 
   if (!user) return (
     <div>
@@ -51,7 +61,17 @@ function App() {
 
   return (
     <div className="App">
-    <AppContext.Provider value={{user, setUser, matches, setMatches, isLoaded, setIsLoaded}}>
+    <AppContext.Provider 
+      value={{
+        user, 
+        setUser, 
+        matches, 
+        setMatches, 
+        isLoaded, 
+        setIsLoaded,
+        chatPageRender,
+        setChatPageRender
+      }}>
     <Header /> 
       <Switch>
       <Route path = "/chat/:id">

@@ -7,7 +7,7 @@ import "./ChatScreen.css"
 function ChatScreen() {
 
     const [messageContent, setMessageContent] = useState("")
-    const {user, setUser, matches, setMatches, isLoaded} = useContext(AppContext);
+    const {user, setUser, matches, isLoaded, setChatPageRender} = useContext(AppContext);
     const [profile, setProfile] = useState(null)
     const [matchId, setMatchId] = useState(0)
     const [matchObj, setMatchObj] = useState([])
@@ -55,7 +55,6 @@ function ChatScreen() {
         e.preventDefault()
         console.log(e.target.value)
         console.log(messageContent)
-
         fetch("/messages", {
             method: "POST",
             headers: {
@@ -70,8 +69,12 @@ function ChatScreen() {
           }).then((r) => {
             if (r.ok) {
               r.json().then((obj) =>{
+                console.log(obj)
+                // matches.find
                 setMsgObj(obj.messages)
                 setMessageContent("")
+                setChatPageRender(true)
+             
               })   
             } else {
               r.json().then((err) => (console.log(err)));
