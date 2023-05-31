@@ -6,7 +6,8 @@
 }
 
 .header__logo{
-    height: 40px;
+    height: 90px;
+    padding-top: 10px;
     object-fit: contain; /* always use this */
 }
 

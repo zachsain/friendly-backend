@@ -27,9 +27,11 @@ function Header( ) {
         <Link to="/">
           <img 
               className="header__logo"
-              src="https://w7.pngwing.com/pngs/698/493/png-transparent-tinder-hd-logo-thumbnail.png" 
+              src="https://i.imgur.com/8H6MxYS.png"
+              // src="https://www.canva.com/design/DAFkhcTlSoU/UXZyJ7Cpy0cDVjYYAUf3_Q/view?utm_content=DAFkhcTlSoU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" 
               alt="tinder-logo"
           />
+          
         </Link>
         
         <Link to="/chat">
