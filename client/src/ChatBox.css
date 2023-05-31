@@ -19,7 +19,7 @@ a {
 /* a effects the Link component text dec takes away the lines color inherits from prev */
 
 .chat__details > p {
-    color: gray;
+    color: black;
 }
 
 .chat__image{
@@ -30,6 +30,13 @@ a {
     color: lightgrey;
 }
 
+#chat__noMessage{
+    color: lightgray;
+}
+
+.handshake-emoji {
+    font-size: 1.5em; /* Adjust the font size to your desired value */
+}
 
 /* .chat__image{
     margin-right: 20px
