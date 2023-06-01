@@ -53,7 +53,7 @@ function App() {
           if (r.ok) {
             console.log("good bye")
             setUser(null)
-            setMatches(null)
+            setMatches([])
           }
         });
 

@@ -25,26 +25,44 @@ function ChatPage() {
     }
   }
 
-  const sortedMatches = matches
-  ? [...matches].sort((a, b) => {
-      const aMessages = a.messages && a.messages.filter(m => m.sender_id === user.id || m.receiver_id === user.id);
-      const bMessages = b.messages && b.messages.filter(m => m.sender_id === user.id || m.receiver_id === user.id);
+  // const sortedMatches = matches
+  // ? [...matches].sort((a, b) => {
+  //     const aMessages = a.messages && a.messages.filter(m => m.sender_id === user.id || m.receiver_id === user.id);
+  //     const bMessages = b.messages && b.messages.filter(m => m.sender_id === user.id || m.receiver_id === user.id);
 
-      const aTimestamp =
-        aMessages && aMessages.length > 0
-          ? new Date(aMessages[aMessages.length - 1].created_at)
-          : a.matches && a.matches.length > 0
-          ? new Date(a.matches[0].created_at)
-          : null;
-      const bTimestamp =
-        bMessages && bMessages.length > 0
-          ? new Date(bMessages[bMessages.length - 1].created_at)
-          : b.matches && b.matches.length > 0
-          ? new Date(b.matches[0].created_at)
-          : null;
-      return bTimestamp - aTimestamp;
-    })
-  : [];
+  //     const aTimestamp =
+  //       aMessages && aMessages.length > 0
+  //         ? new Date(aMessages[aMessages.length - 1].created_at)
+  //         : a.matches && a.matches.length > 0
+  //         ? new Date(a.matches[0].created_at)
+  //         : null;
+  //     const bTimestamp =
+  //       bMessages && bMessages.length > 0
+  //         ? new Date(bMessages[bMessages.length - 1].created_at)
+  //         : b.matches && b.matches.length > 0
+  //         ? new Date(b.matches[0].created_at)
+  //         : null;
+  //     return bTimestamp - aTimestamp;
+  //   })
+  // : [];
+
+  const sortedMatches = matches
+    ? [...matches].sort((a, b) => {
+        const aTimestamp =
+          a.messages && a.messages.length > 0
+            ? new Date(a.messages[a.messages.length - 1].created_at)
+            : a.matches && a.matches.length > 0
+            ? new Date(a.matches[0].created_at)
+            : null;
+        const bTimestamp =
+          b.messages && b.messages.length > 0
+            ? new Date(b.messages[b.messages.length - 1].created_at)
+            : b.matches && b.matches.length > 0
+            ? new Date(b.matches[0].created_at)
+            : null;
+        return bTimestamp - aTimestamp;
+      })
+    : [];
     
     console.log(sortedMatches)
     
@@ -66,9 +84,23 @@ function ChatPage() {
         });
       }
 
+      let matchDate = null;
+      let formattedTime = null;
+
+      if (p.matches && p.matches.length > 0) {
+        const currentUserMatch = p.matches.find((match) => match.user1_id === user.id || match.user2_id === user.id);
+        // console.log(p.matches)
+        console.log(currentUserMatch)
+        if (currentUserMatch) {
+          matchDate = new Date(currentUserMatch.created_at);
+          formattedTime = getTimeDifference(currentUserMatch.created_at);
+        }
+      }
+
     const timestamp = mostRecentMessage ? getTimeDifference(mostRecentMessage.created_at) : null;
-    const matchDate = new Date(p.matches[0].created_at);
-    const formattedTime = getTimeDifference(p.matches[0].created_at);
+    // const matchDate = new Date(p.matches[0].created_at);
+    // const formattedTime = getTimeDifference(p.matches[0].created_at);
+
     // ADD READ COLUMN TO MATCHES AND MESSAGES TABLES
     return (
       <ChatBox

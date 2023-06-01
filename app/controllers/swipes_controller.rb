@@ -1,14 +1,22 @@
 class SwipesController < ApplicationController
     before_action :authorize, only: [:create]
 
+    # def create
+    #     user = User.find(session[:user_id])
+    #     swipe = user.swipes.create(swipe_params)
+    #     matching_swipe = find_matching_swipe(swipe)
+    #     handle_matching_swipe(matching_swipe) if matching_swipe.present?
+         
+    #     render json: { user: user_with_profile(user), match: matching_swipe.present? }
+    # end
+
     def create
         user = User.find(session[:user_id])
         swipe = user.swipes.create(swipe_params)
         matching_swipe = find_matching_swipe(swipe)
-        handle_matching_swipe(matching_swipe) if matching_swipe.present?
-        
-        # render json: { user: user_with_profile(user), match: matching_swipe.present? }   
-        render json: { user: user_with_profile(user), match: matching_swipe.present? }
+        new_match_data = matching_swipe.present? ? handle_matching_swipe(matching_swipe) : nil
+      
+        render json: { user: user_with_profile(new_match_data), match: new_match_data.present? }
     end
 
     private 
@@ -26,21 +34,34 @@ class SwipesController < ApplicationController
         matching_swipe if matching_swipe&.direction == 'right'
     end
   
+    # def handle_matching_swipe(matching_swipe)
+    #     match = Match.create(user1_id: matching_swipe.swiper_id, user2_id: matching_swipe.swipee_id)
+    #     match.slice(:id, :user1_id, :user2_id, :created_at)
+    # end
+      
     def handle_matching_swipe(matching_swipe)
-        Match.create(user1_id: matching_swipe.swiper_id, user2_id: matching_swipe.swipee_id)
-
+        match = Match.create(user1_id: matching_swipe.swiper_id, user2_id: matching_swipe.swipee_id)
+        match
       end
 
-      def user_with_profile(user)
-        profile = user.profile.slice(:id, :first_name, :last_name, :bio, :dob, :gender)
-      
-        if user.profile.featured_image.attached?
-          profile[:featured_image] = { url: rails_blob_url(user.profile.featured_image) }
-        end
-      
-        { id: user.id, username: user.username, email: user.email, profile: profile }
-      end
-      
 
+        def user_with_profile(new_match_data)
+            matching_user = User.find_by(id: new_match_data&.user1_id)
+            return nil unless matching_user
+          
+            profile = matching_user.profile.slice(:id, :first_name, :last_name, :bio, :dob, :gender)
+          
+            if matching_user.profile.featured_image.attached?
+              profile[:featured_image] = { url: rails_blob_url(matching_user.profile.featured_image) }
+            end
+          
+            if new_match_data.present?
+              matches = new_match_data.slice(:id, :user1_id, :user2_id, :created_at)
+              messages = matching_user.messages(:id, :receiver_id, :sender_id, :content, :match_id, :created_at, :updated_at)
+            end
+          
+            { id: matching_user.id, username: matching_user.username, email: matching_user.email, profile: profile, matches: matches, messages: messages }
+          end
+             
   end
   
