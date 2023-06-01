@@ -7,7 +7,8 @@ class SwipesController < ApplicationController
         matching_swipe = find_matching_swipe(swipe)
         handle_matching_swipe(matching_swipe) if matching_swipe.present?
         
-        render json: { user: user_with_profile(user), match: matching_swipe.present? }   
+        # render json: { user: user_with_profile(user), match: matching_swipe.present? }   
+        render json: { user: user_with_profile(user), match: matching_swipe.present? }
     end
 
     private 

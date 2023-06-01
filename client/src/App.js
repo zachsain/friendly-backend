@@ -14,7 +14,7 @@ import SwipeDeck from './SwipeDeck';
 
 function App() {
   const [user, setUser] = useState(null)
-  const [matches, setMatches] = useState(null)
+  const [matches, setMatches] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
   const [ chatPageRender, setChatPageRender ] = useState(false)
 
