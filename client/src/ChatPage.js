@@ -5,7 +5,7 @@ import ChatBox from './ChatBox';
 
 function ChatPage() {
   const { user, matches, chatPageRender, setChatPageRender} = useContext(AppContext);
-  
+
   function getTimeDifference(timestamp) {
     const currentTime = new Date();
     const messageTime = new Date(timestamp);
@@ -72,9 +72,22 @@ function ChatPage() {
 
       let matchDate = null;
       let formattedTime = null;
+      let opened = false
+      let userOpenedId = null
 
       if (p.matches && p.matches.length > 0) {
         const currentUserMatch = p.matches.find((match) => match.user1_id === user.id || match.user2_id === user.id);
+        console.log(currentUserMatch)
+
+      if (currentUserMatch) {
+        if (currentUserMatch.user1_id === user.id) {
+          opened = currentUserMatch.user1_opened;
+          userOpenedId = currentUserMatch.user1_id;
+        } else if (currentUserMatch.user2_id === user.id) {
+          opened = currentUserMatch.user2_opened;
+          userOpenedId = currentUserMatch.user2_id;
+        }
+      }
 
         if (currentUserMatch) {
           matchDate = new Date(currentUserMatch.created_at);
@@ -83,7 +96,8 @@ function ChatPage() {
       }
 
     const timestamp = mostRecentMessage ? getTimeDifference(mostRecentMessage.created_at) : null;
- 
+
+
     return (
       <ChatBox
         key={[p.id]}
@@ -94,6 +108,7 @@ function ChatPage() {
         timestamp={mostRecentMessage ? timestamp : formattedTime}
         profilePic={p.profile.featured_image.url}
         id={p.id}
+        // highligh={}
       />
     );
   });

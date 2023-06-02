@@ -60,6 +60,29 @@
     overflow-y: scroll;
   }
 
+  .chat__image__link {
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+  }
+
+  .chatScreen__image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    
+  }
+  
+ .chat__image__link:hover{
+    box-shadow: 0 100px 100px black;
+ }
+
+ .chat__image__msg{
+    /* height: 40px;
+    width: 40px; */
+    cursor: pointer;
+ }
 
 /* position: fixed;
 bottom: 0; this fixes our input field to the botton of the screen */

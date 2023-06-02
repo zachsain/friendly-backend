@@ -5,6 +5,7 @@ class CreateMessages < ActiveRecord::Migration[6.1]
       t.belongs_to :receiver, foreign_key: { to_table: :users }
       t.integer :match_id
       t.text :content
+      t.boolean :receiver_read
       t.timestamps
     end
   end

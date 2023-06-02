@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_172216) do
   create_table "matches", force: :cascade do |t|
     t.bigint "user1_id", null: false
     t.bigint "user2_id", null: false
+    t.boolean "user1_opened"
+    t.boolean "user2_opened"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user1_id"], name: "index_matches_on_user1_id"
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_172216) do
     t.bigint "receiver_id"
     t.integer "match_id"
     t.text "content"
+    t.boolean "receiver_read"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"

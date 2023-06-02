@@ -1,5 +1,5 @@
 import React,{ useState, useContext, useEffect, useRef} from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Avatar } from '@mui/material'
 import AppContext from './AppContext';
 import "./ChatScreen.css"
@@ -15,6 +15,7 @@ function ChatScreen() {
     const [firstName, setFirstName] = useState("")
     const { id } = useParams()
     const chatBoxRef = useRef(null);
+    const history = useHistory()
     // console.log(id)
     // console.log(matches)
 
@@ -29,7 +30,7 @@ function ChatScreen() {
           );
         
           let messages = user && user.messages.filter((m) => m.match_id === match.id)
-          
+
           setMsgObj(messages)
           setMatchObj(match)
           setMatchId(match.id)
@@ -81,18 +82,31 @@ function ChatScreen() {
     }
     const createdDate = new Date(matchObj.created_at);
     const formattedDate = `${createdDate.getMonth() + 1}/${createdDate.getDate()}/${createdDate.getFullYear()}`;
+    function handleProfileClick(e){
+        history.push(`/profile/${id}`)
+    }
 
-      if (!isLoaded || !matches) return <h1>Loading...</h1>;
+    if (!isLoaded || !matches) return <h1>Loading...</h1>;
 
   return (
     <div className="chatScreen" ref={chatBoxRef}>
-        <div className="chatScreen--chatContainer" >
+        <div className="chatScreen--chatContainer">
         <p className="chatScreen__timestamp"> YOU MATCHED WITH {firstName} ON {formattedDate}</p>
+        { profile && 
+        <div className="chatScreen__image-container"> 
+        <Avatar 
+            onClick={handleProfileClick} 
+            className="chat__image__link" 
+            alt={firstName} 
+            src={profile.profile.featured_image.url} 
+        />
+        </div>}
         { profile && msgObj.map((m) => (
             m.sender_id === parseInt(id) ? (  
                 <div className="chatScreen__message"> 
-                    <Avatar 
-                        className="chat__image" 
+                    <Avatar
+                        onClick={handleProfileClick}
+                        className="chat__image__msg" 
                         alt={m.name} 
                         src={profile.profile.featured_image.url} 
                     />

@@ -38,11 +38,10 @@ a {
     font-size: 1.5em; /* Adjust the font size to your desired value */
 }
 
-/* .chat__image{
+.chat__image{
     margin-right: 20px
-} 
-this pushes over the chat details to the right 
-*/
+}  
+
 
 /* flex: 1; is to give the container 
 to take up as much room as possible within the space between

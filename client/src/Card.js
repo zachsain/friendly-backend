@@ -34,7 +34,7 @@ function Card() {
       body: JSON.stringify({
         swipee_id: id,
         swiper_id: user.id,
-        direction: "right"
+        direction: "right",
       
       }),
     }).then((r) => {
