@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-    before_action :authorize, only: [:update, :index]
+    before_action :authorize, only: [:update, :index, :show]
     rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_data
   
     def index 
@@ -20,6 +20,10 @@ class ProfilesController < ApplicationController
       render json: user
     end
 
+    def show 
+        profile = Profile.find(params[:id])
+        render json: profile
+    end 
      
   
     private

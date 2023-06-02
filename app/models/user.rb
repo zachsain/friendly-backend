@@ -6,9 +6,10 @@ class User < ApplicationRecord
     # has_many :sent_messages, class_name: 'Message', foreign_key: :sender_id, dependent: :destroy
     # has_many :received_messages, class_name: 'Message', foreign_key: :receiver_id, dependent: :destroy
     # has_many :messages, dependent: :destroy
-    has_many :messages, through: :matches
     has_many :matches_as_user1, class_name: 'Match', foreign_key: :user1_id
     has_many :matches_as_user2, class_name: 'Match', foreign_key: :user2_id
+    has_many :messages, through: :matches
+    has_many :messages_through_matches, through: :matches, source: :messages
     has_secure_password
 
     def matches

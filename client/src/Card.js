@@ -4,6 +4,7 @@ import AppContext from './AppContext';
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SwipeButtons from './SwipeButtons';
+import { Link } from 'react-router-dom'
 import './Cards.css';
 import './DisplayCard.css';
 
@@ -11,7 +12,7 @@ function Card() {
   const [profiles, setProfiles] = useState([]);
   const [errors, setErrors] = useState("")
   const [swipeeId, setSwipeeId] = useState(0)
-  const {user, setUser, matches, setMatches} = useContext(AppContext);
+  const {user, setUser, matches, setMatches, setChatPageRender} = useContext(AppContext);
   const tinderCardRef = useRef(null);
 
   useEffect(() => {
@@ -44,6 +45,7 @@ function Card() {
             let previous = matches 
             let updatedMatches = [...previous, obj.user]
             setMatches(updatedMatches)
+            setChatPageRender(true)
           }
         })   
       } else {
@@ -81,6 +83,8 @@ function Card() {
 
   }
 
+  console.log(profiles)
+
   return (
     <div className="tinderCards__cardContainer">
       {profiles.map((p) => (
@@ -92,6 +96,7 @@ function Card() {
           onCardLeftScreen={() => handleCardLeftScreen(p.user_id)}
         >
           <div className="tinder--cards">
+          <Link to={`/profile/${p.id}`}>
             <div className="tinder--card">
               <div className="displayCard">
                 <div className="displayCard__image-container">
@@ -102,6 +107,7 @@ function Card() {
                 </div>
               </div>
             </div>
+            </Link>
           </div>
 
           <div className="swipeButtons-conatiner">

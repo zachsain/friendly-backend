@@ -10,7 +10,7 @@ import ChatScreen from './ChatScreen';
 import UserProfile from './UserProfile';
 import Login from './Login';
 import AppContext from './AppContext';
-import SwipeDeck from './SwipeDeck';
+import ProfilePage from './ProfilePage';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -36,7 +36,6 @@ function App() {
 
   useEffect(() => {
     if (isLoaded && chatPageRender) {
-      console.log("Updating logic when chatPageRender changes");
       setChatPageRender(false); 
     }
   }, [isLoaded, chatPageRender]);
@@ -53,10 +52,9 @@ function App() {
           if (r.ok) {
             console.log("good bye")
             setUser(null)
-            setMatches([])
+            setChatPageRender(true)
           }
         });
-
     }
 
   return (
@@ -83,13 +81,13 @@ function App() {
         <Route path = "/userprofile">
           <UserProfile />
         </Route>
+        <Route path = "/profile/:id">
+          <ProfilePage />
+        </Route>
         <Route exact path="/">
             {user ? (
               <div>
                 <Card />
-                {/* <SwipeDeck /> */}
-
-                {/* <SwipeButtons /> */}
               </div>
             ) : (
               <Login setUser={setUser} />

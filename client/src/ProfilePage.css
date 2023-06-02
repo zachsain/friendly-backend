@@ -1,0 +1,166 @@
+
+.userProfile {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 30px;
+    position: relative;
+    text-align: center;
+    width: 90%;
+    max-width: 600px; /* Adjust the value to your desired width */
+    height: 600px; /* Set a fixed height to accommodate the larger image size */
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .userProfile:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .userProfile__image-container {
+    position: relative;
+    width: 400px; 
+    height: 500px; 
+    padding-bottom: 75%; 
+  }
+  
+  .userProfile__image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 460px; /* Adjust the width to your desired value */
+    height: 460px; /* Adjust the height to your desired value */
+    object-fit: contain;
+    border-radius: 20px;
+  }
+  
+  
+  /* .userProfile:hover::after {
+    content: "Edit";
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+  } */
+  
+  .userProfile__h1 {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+  
+  .userProfile p {
+    font-size: 18px;
+    margin-bottom: 20px; 
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(61, 60, 60, 0.16);
+  }
+  
+  .edit-icon-container {
+    position: absolute;
+    bottom: 10px;
+    right: 1px;
+  }
+  
+  .edit-icon {
+    font-size: 50px;
+    color: #555;
+  } 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* .userProfile {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 30px;
+    position: relative;
+    text-align: center;
+    width: 90%;
+    max-width: 600px; 
+    height: 600px; 
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+  }
+  
+  .userProfile img {
+    border-radius: 20px;
+    height: 600px; 
+    width: 400px; 
+    object-fit: contain; 
+    margin-bottom: 20px; 
+  }
+  
+  @media (max-width: 768px) {
+    .userProfile img {
+      height: 350px;
+      width: 100%;
+    }
+  }
+  
+  .image-h1-container{
+    position: relative;
+    text-align: center;
+    margin: -70px;
+  }
+  
+  .userProfile h1 {
+    position: absolute;
+    bottom: 130px;
+    left: 16px;
+    color: rgb(248, 11, 11);
+  }
+  
+  
+  .userProfile p {
+    font-size: 18px;
+    margin-bottom: 20px; 
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+  }
+  
+  .edit-icon-container {
+    position: absolute;
+    bottom: 10px;
+    right: 1px;
+  }
+  
+  .edit-icon {
+    font-size: 50px;
+    color: #555;
+  } */
+  

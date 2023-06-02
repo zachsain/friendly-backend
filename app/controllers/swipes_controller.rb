@@ -56,11 +56,12 @@ class SwipesController < ApplicationController
             end
           
             if new_match_data.present?
-              matches = new_match_data.slice(:id, :user1_id, :user2_id, :created_at)
-              messages = matching_user.messages(:id, :receiver_id, :sender_id, :content, :match_id, :created_at, :updated_at)
+              matches = matching_user.matches_as_user1.map { |match| match.slice(:id, :user1_id, :user2_id, :created_at) }
+              new_matches = matches << new_match_data.slice(:id, :user1_id, :user2_id, :created_at)
+            #   messages = matching_user.messages.map { |message| message.slice(:id, :receiver_id, :sender_id, :content, :match_id, :created_at, :updated_at) }
             end
           
-            { id: matching_user.id, username: matching_user.username, email: matching_user.email, profile: profile, matches: matches, messages: messages }
+            { id: matching_user.id, username: matching_user.username, email: matching_user.email, profile: profile, matches: new_matches}
           end
              
   end

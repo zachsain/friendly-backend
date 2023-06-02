@@ -29,6 +29,7 @@ function ChatScreen() {
           );
         
           let messages = user && user.messages.filter((m) => m.match_id === match.id)
+          
           setMsgObj(messages)
           setMatchObj(match)
           setMatchId(match.id)
@@ -48,8 +49,6 @@ function ChatScreen() {
         scrollToBottom();
       }, [msgObj]);
     
-   
-      console.log(msgObj)
  
     function handleSendMessage(e){
         e.preventDefault()
@@ -69,8 +68,6 @@ function ChatScreen() {
           }).then((r) => {
             if (r.ok) {
               r.json().then((obj) =>{
-                console.log(obj)
-                // matches.find
                 setMsgObj(obj.messages)
                 setMessageContent("")
                 setChatPageRender(true)
