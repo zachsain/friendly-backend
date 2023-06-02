@@ -1,11 +1,17 @@
 class MessagesController < ApplicationController
-    before_action :authorize, only: [:create]
+    before_action :authorize, only: [:create, :update]
 
     def create 
         match = Match.find(params[:match_id])
         message = match.messages.create(message_params)
         render json: match
     end 
+
+
+    def update 
+        message = Message.find(params[:id])
+        message.update(receiver_read: true)
+    end
 
     private 
 

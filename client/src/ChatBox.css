@@ -1,10 +1,21 @@
-.chat{
+.chat-read{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
     height: 70px;
     border-bottom: 1px solid #fafafa;
+    background-color: #ffffff
+}
+
+.chat-unread{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 70px;
+    border-bottom: 1px solid #fafafa;
+    border: 2px solid #1e1a15
 }
 
 .chat__details{

@@ -48,7 +48,7 @@ function ChatPage() {
           if (currentUserMatch) {
             return new Date(currentUserMatch.created_at);
           }
-        }
+        } 
         return null;
       }
 
@@ -70,29 +70,32 @@ function ChatPage() {
         });
       }
 
-      let matchDate = null;
-      let formattedTime = null;
-      let opened = false
+      let matchDate = null
+      let formattedTime = null
+      let matchOpened = false
       let userOpenedId = null
+      let matchId;
+      let messageRead = mostRecentMessage.receiver_read
 
       if (p.matches && p.matches.length > 0) {
         const currentUserMatch = p.matches.find((match) => match.user1_id === user.id || match.user2_id === user.id);
-        console.log(currentUserMatch)
 
       if (currentUserMatch) {
         if (currentUserMatch.user1_id === user.id) {
-          opened = currentUserMatch.user1_opened;
+          matchOpened = currentUserMatch.user1_opened;
           userOpenedId = currentUserMatch.user1_id;
         } else if (currentUserMatch.user2_id === user.id) {
-          opened = currentUserMatch.user2_opened;
+          matchOpened = currentUserMatch.user2_opened;
           userOpenedId = currentUserMatch.user2_id;
         }
+        matchId = currentUserMatch.id
       }
-
-        if (currentUserMatch) {
-          matchDate = new Date(currentUserMatch.created_at);
-          formattedTime = getTimeDifference(currentUserMatch.created_at);
-        }
+    
+      
+      if (currentUserMatch) {
+        matchDate = new Date(currentUserMatch.created_at);
+        formattedTime = getTimeDifference(currentUserMatch.created_at);
+      }
       }
 
     const timestamp = mostRecentMessage ? getTimeDifference(mostRecentMessage.created_at) : null;
@@ -108,7 +111,11 @@ function ChatPage() {
         timestamp={mostRecentMessage ? timestamp : formattedTime}
         profilePic={p.profile.featured_image.url}
         id={p.id}
-        // highligh={}
+        messageId={mostRecentMessage.id}
+        // opened={opened}
+        matchOpened={matchOpened}
+        messageRead={messageRead}
+        matchId={matchId}
       />
     );
   });
