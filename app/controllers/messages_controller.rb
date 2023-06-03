@@ -10,7 +10,12 @@ class MessagesController < ApplicationController
 
     def update 
         message = Message.find(params[:id])
-        message.update(receiver_read: true)
+        if message.receiver_id === session[:user_id]
+            
+            message.update(receiver_read: true)
+        end 
+
+        render json: message
     end
 
     private 

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './AppContext';
 import { useHistory } from "react-router-dom";
 import './LoginForm.css'
 
-function LoginForm({ setUser, setLoginOrSignup}) {
+function LoginForm({ setUser, setLoginOrSignup, setChatPageRender }) {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState("")
     const history = useHistory();
+
   
     function handleLogin(e) {
       e.preventDefault();
@@ -22,6 +24,7 @@ function LoginForm({ setUser, setLoginOrSignup}) {
           r.json().then((user) => {
             history.push('/')
               setUser(user)
+              setChatPageRender(true)
 
           })
         } else {

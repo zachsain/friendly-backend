@@ -11,7 +11,7 @@ function ChatScreen() {
     const [profile, setProfile] = useState(null)
     const [matchId, setMatchId] = useState(0)
     const [matchObj, setMatchObj] = useState([])
-    const [msgObj, setMsgObj] = useState(null)
+    const [msgObj, setMsgObj] = useState([])
     const [firstName, setFirstName] = useState("")
     const { id } = useParams()
     const chatBoxRef = useRef(null);
@@ -21,7 +21,7 @@ function ChatScreen() {
 
     useEffect(() => {
         if (isLoaded && matches) {
-
+         
           let userProfile = matches.find((m) => m.id === parseInt(id));
           let match = user && user.matches.find(
             (m) =>
@@ -30,7 +30,7 @@ function ChatScreen() {
           );
         
           let messages = user && user.messages.filter((m) => m.match_id === match.id)
-
+        //   let messages = user && matches.messages.filter((m) => m.match_id === match.id)
           setMsgObj(messages)
           setMatchObj(match)
           setMatchId(match.id)
@@ -72,6 +72,13 @@ function ChatScreen() {
                 setMsgObj(obj.messages)
                 setMessageContent("")
                 setChatPageRender(true)
+
+                // let match = user && user.matches.find(
+                //     (m) =>
+                //       (m.user1_id === parseInt(id) || m.user1_id === user.id) &&
+                //       (m.user2_id === parseInt(id) || m.user2_id === user.id)
+                //   );
+                // setMatchObj(match);
              
               })   
             } else {
@@ -82,6 +89,7 @@ function ChatScreen() {
     }
     const createdDate = new Date(matchObj.created_at);
     const formattedDate = `${createdDate.getMonth() + 1}/${createdDate.getDate()}/${createdDate.getFullYear()}`;
+
     function handleProfileClick(e){
         history.push(`/profile/${id}`)
     }
@@ -105,6 +113,7 @@ function ChatScreen() {
             m.sender_id === parseInt(id) ? (  
                 <div className="chatScreen__message"> 
                     <Avatar
+                        key={m.id}
                         onClick={handleProfileClick}
                         className="chat__image__msg" 
                         alt={m.name} 

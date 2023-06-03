@@ -68,14 +68,32 @@ function ChatPage() {
             }
           }
         });
-      }
+      } 
 
       let matchDate = null
       let formattedTime = null
       let matchOpened = false
       let userOpenedId = null
       let matchId;
-      let messageRead = mostRecentMessage.receiver_read
+
+      let messageRead;
+
+        // if (mostRecentMessage.receiver.id === user.id){
+        //   messageRead = mostRecentMessage.receevier_read
+        // } else {
+        //   messageRead = true
+        // }
+        console.log(mostRecentMessage)
+
+        if(mostRecentMessage){
+        if (mostRecentMessage.receiver_id === user.id){
+          messageRead = mostRecentMessage.receiver_read;
+        } else {
+          messageRead = true;
+        }
+      }
+
+      console.log(messageRead)
 
       if (p.matches && p.matches.length > 0) {
         const currentUserMatch = p.matches.find((match) => match.user1_id === user.id || match.user2_id === user.id);
@@ -90,7 +108,7 @@ function ChatPage() {
         }
         matchId = currentUserMatch.id
       }
-    
+      
       
       if (currentUserMatch) {
         matchDate = new Date(currentUserMatch.created_at);
@@ -100,7 +118,7 @@ function ChatPage() {
 
     const timestamp = mostRecentMessage ? getTimeDifference(mostRecentMessage.created_at) : null;
 
-
+    console.log(matches)
     return (
       <ChatBox
         key={[p.id]}
@@ -111,10 +129,9 @@ function ChatPage() {
         timestamp={mostRecentMessage ? timestamp : formattedTime}
         profilePic={p.profile.featured_image.url}
         id={p.id}
-        messageId={mostRecentMessage.id}
-        // opened={opened}
+        messageId={mostRecentMessage ? mostRecentMessage.id : null }
         matchOpened={matchOpened}
-        messageRead={messageRead}
+        messageRead={mostRecentMessage ? messageRead : true}
         matchId={matchId}
       />
     );

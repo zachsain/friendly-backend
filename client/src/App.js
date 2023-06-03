@@ -14,9 +14,11 @@ import ProfilePage from './ProfilePage';
 
 function App() {
   const [user, setUser] = useState(null)
-  const [matches, setMatches] = useState([])
+  const [matches, setMatches] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [ chatPageRender, setChatPageRender ] = useState(false)
+  const [logout, setLogout] = useState(false)
+  const [render, setRender] = useState(false)
 
   useEffect(() => {
     // auto-login
@@ -33,30 +35,36 @@ function App() {
     });
   } , [chatPageRender]);
 
+  function handleLogout(e){
+    e.preventDefault();        
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+        if (r.ok) {
+          console.log("good bye")
+          setUser(null)
+          setMatches(null)
+          setChatPageRender(false)
+          setIsLoaded(false)
+          setLogout(true)
+        }
+      });
+  }
 
-  useEffect(() => {
-    if (isLoaded && chatPageRender) {
-      setChatPageRender(false); 
-    }
-  }, [isLoaded, chatPageRender]);
+  console.log(user)
+  console.log(matches)
+
+  // useEffect(() => {
+  //   if (isLoaded && chatPageRender) {
+  //     setChatPageRender(false); 
+  //   }
+  // }, [isLoaded, chatPageRender]);
 
 
   if (!user) return (
     <div>
-        <Login setUser={setUser} />
+        <Login setChatPageRender={setChatPageRender} setUser={setUser} />
     </div>)
 
-    function handleLogout(e){
-      e.preventDefault();        
-      fetch("/logout", { method: "DELETE" }).then((r) => {
-          if (r.ok) {
-            console.log("good bye")
-            setUser(null)
-            setChatPageRender(true)
-          }
-        });
-    }
-
+  
   return (
     <div className="App">
     <AppContext.Provider 

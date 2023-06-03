@@ -12,7 +12,7 @@ function Card() {
   const [profiles, setProfiles] = useState([]);
   const [errors, setErrors] = useState("")
   const [swipeeId, setSwipeeId] = useState(0)
-  const {user, setUser, matches, setMatches, setChatPageRender} = useContext(AppContext);
+  const {user, setUser, matches, setMatches, setChatPageRender, chatPageRender} = useContext(AppContext);
   const tinderCardRef = useRef(null);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function Card() {
             let previous = matches 
             let updatedMatches = [...previous, obj.user]
             setMatches(updatedMatches)
-            setChatPageRender(true)
+            setChatPageRender(!chatPageRender)
           }
         })   
       } else {

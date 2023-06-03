@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './AppContext';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {useHistory} from "react-router-dom";
 import './SignupForm.css';
 
-function SignupForm({ setLoginOrSignup, setUser }) {
+function SignupForm({ setLoginOrSignup }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +20,7 @@ function SignupForm({ setLoginOrSignup, setUser }) {
   const [dob, setDob] = useState(null);
   const genderOptions = ['Male', 'Female', 'Non-binary', 'Other'];
   const history = useHistory();
+  const { setUser } = useState(AppContext)
 
   function handleSignup(e) {
     e.preventDefault();

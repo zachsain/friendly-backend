@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import AppContext from './AppContext';
 import { Avatar } from '@mui/material'
 import { Link } from 'react-router-dom'
 import "./ChatBox.css"
 
 function Chat({name, message, profilePic, timestamp, id, matchId, matchOpened, messageId, messageRead, mostRecentMessage}) {
 
-  console.log(messageId)
+  const { chatPageRender, setChatPageRender, setIsLoaded } = useContext(AppContext)
+
   let opened = false 
   
   if(matchOpened){
@@ -16,20 +18,25 @@ function Chat({name, message, profilePic, timestamp, id, matchId, matchOpened, m
     console.log('click')
   }
 
-  console.log(messageRead)
-
   const chatBoxClassName = opened ? "chat-read" : "chat-unread";
 
   function handleOpen(e) {
 
+    setIsLoaded(true)
+    setChatPageRender(!chatPageRender)
+
      if (!matchOpened) {
-      fetch(`/match/${matchId}`, {
+      fetch(`/matches/${matchId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-        }),
+        })
+      }).then((r) => {
+        if (r.ok) {
+          r.json().then((m) => console.log(m))
+        }
       })
         .catch((error) => {
           console.error("Error opening chat:", error);
@@ -42,6 +49,10 @@ function Chat({name, message, profilePic, timestamp, id, matchId, matchOpened, m
           },
           body: JSON.stringify({
           }),
+        }).then((r) => {
+          if (r.ok) {
+            r.json().then((m) => console.log(m))
+          }
         })
           .catch((error) => {
             console.error("Error opening chat:", error);
