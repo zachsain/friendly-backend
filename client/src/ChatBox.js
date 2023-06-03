@@ -24,6 +24,7 @@ function Chat({name, message, profilePic, timestamp, id, matchId, matchOpened, m
 
     setIsLoaded(true)
     setChatPageRender(!chatPageRender)
+  
 
      if (!matchOpened) {
       fetch(`/matches/${matchId}`, {
@@ -48,6 +49,7 @@ function Chat({name, message, profilePic, timestamp, id, matchId, matchOpened, m
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            match_id: matchId
           }),
         }).then((r) => {
           if (r.ok) {
