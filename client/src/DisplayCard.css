@@ -1,20 +1,4 @@
-/* .tinder--card {
-    width: 400px;
-    height: 500px;
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    padding: 30px;
-    position: relative;
-    text-align: center;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-  } */
+
 
   .loaded.tinder {
     opacity: 1;
@@ -52,7 +36,6 @@
     align-items: center;
     margin: 0 auto;
     padding: 30px;
-    /* position: absolute; */
     text-align: center;
     overflow: hidden;
     will-change: transform;
@@ -78,21 +61,24 @@
     padding-bottom: 0;
   }
   
+
   .tinder--card .tinder--card-img {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
-    object-fit: contain;
+    width: 340px;
+    height: 435px;
+    object-fit: cover;
     border-radius: 20px;
+    
   }
   
   .tinder--card .dislpayCard__h1 {
     position: absolute;
-    bottom: 30px;
-    left: 40px;
+    bottom: 20px;
+    left: 24%;
+    transform: translateX(-50%);
     margin: 0;
     font-size: 24px;
     color: #fff;
@@ -100,4 +86,3 @@
     padding: 5px 10px;
     border-radius: 10px;
   }
-  

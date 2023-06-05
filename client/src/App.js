@@ -11,29 +11,53 @@ import UserProfile from './UserProfile';
 import Login from './Login';
 import AppContext from './AppContext';
 import ProfilePage from './ProfilePage';
+// import {Blocks} from "react-loader-spinner";
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import {InfinitySpin} from 'react-loader-spinner';
+
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 function App() {
   const [user, setUser] = useState(null)
   const [matches, setMatches] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [ chatPageRender, setChatPageRender ] = useState(false)
+  const [chatPageRender, setChatPageRender] = useState(false)
   const [logout, setLogout] = useState(false)
   const [render, setRender] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // useEffect(() => {
+  //   fetch("/me").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => (
+  //         setUser(user.user), 
+  //         setMatches(user.matched_with), 
+  //         console.log(user), 
+  //         setIsLoaded(true),
+  //         setIsLoggedIn(true)
+  //         ));
+  //     }
+  //   });
+  // } , [chatPageRender]);
 
   useEffect(() => {
-    // auto-login
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => (
-          setUser(user.user), 
-          setMatches(user.matched_with), 
-          console.log(user), 
-          setIsLoaded(true)
-          ));
-   
-      }
-    });
-  } , [chatPageRender]);
+    fetch("/me")
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((user) => {
+            setUser(user.user);
+            setMatches(user.matched_with);
+            setIsLoaded(true);
+            setIsLoggedIn(true); // Set isLoggedIn to true if the user is logged in
+          });
+        } else {
+          setIsLoaded(true); // Set isLoaded to true even if the request fails
+        }
+      })
+      .catch((error) => {
+        setIsLoaded(true); // Set isLoaded to true in case of any error
+      });
+  }, [chatPageRender]);
 
   function handleLogout(e){
     e.preventDefault();        
@@ -44,6 +68,7 @@ function App() {
           setMatches(null)
           setChatPageRender(false)
           setIsLoaded(false)
+          setIsLoggedIn(false)
           setLogout(true)
         }
       });
@@ -52,16 +77,20 @@ function App() {
   console.log(user)
   console.log(matches)
 
-  // useEffect(() => {
-  //   if (isLoaded && chatPageRender) {
-  //     setChatPageRender(false); 
-  //   }
-  // }, [isLoaded, chatPageRender]);
-
+  // if (!isLoaded) {
+  //   return (
+  //     <div className="loading-spinner">
+  //      <InfinitySpin 
+  //       width='200'
+  //       color="#4fa94d"
+  //     />
+  //     </div>
+  //   );
+  // }
 
   if (!user) return (
     <div>
-        <Login setChatPageRender={setChatPageRender} setUser={setUser} />
+        <Login setIsLoggedIn={setIsLoggedIn} setChatPageRender={setChatPageRender} setUser={setUser} />
     </div>)
 
   

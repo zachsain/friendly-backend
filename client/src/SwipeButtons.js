@@ -10,10 +10,10 @@ function SwipeButtons({ onSwipeLeft, onSwipeRight }) {
   return (
     <div className="swipeButtons">
       <button id="nope" className="swipeButtons__left" onClick={onSwipeLeft}>
-        <CloseIcon fontSize="large" />
+        <CloseIcon style={{ fontSize: 45 }} />
       </button>
       <button id="love" className="swipeButtons__right" onClick={onSwipeRight}>
-        <FavoriteIcon fontSize="large" />
+        <FavoriteIcon style={{ fontSize: 45 }} />
       </button>
     </div>
   );

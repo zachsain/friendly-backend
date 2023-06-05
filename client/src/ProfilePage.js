@@ -38,11 +38,11 @@ function ProfilePage() {
   return (
     <div>
         <div className="profilePage">
-        <div className="userProfile__image-container">
-          <img className="userProfile__image" src={profile.featured_image.url} alt="profile-photo" />
-          <h1 className="userProfile__h1">{profile.first_name}, {age} </h1>
-        </div>
-        <p className="userProfile__p">{profile.bio}</p>
+            <div className="userProfile__image-container">
+            <img className="userProfile__image" src={profile.featured_image.url} alt="profile-photo" />
+            <h1 className="userProfile__h1">{profile.first_name}, {age} </h1>
+            </div>
+            <p className="userProfile__p">{profile.bio}</p>
         </div>
 
     </div>

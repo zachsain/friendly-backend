@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {useHistory} from "react-router-dom";
 import './SignupForm.css';
 
-function SignupForm({ setLoginOrSignup }) {
+function SignupForm({ setUser, setLoginOrSignup, setIsLoggedIn }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ function SignupForm({ setLoginOrSignup }) {
   const [dob, setDob] = useState(null);
   const genderOptions = ['Male', 'Female', 'Non-binary', 'Other'];
   const history = useHistory();
-  const { setUser } = useState(AppContext)
+
 
   function handleSignup(e) {
     e.preventDefault();
@@ -46,6 +46,7 @@ function SignupForm({ setLoginOrSignup }) {
           setUser(user);
           console.log(user);
           history.push('/')
+          setIsLoggedIn(true)
         });
       } else {
         r.json().then((error) => {

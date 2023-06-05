@@ -1,7 +1,7 @@
 .card {
     position: relative;
-    width: 500px; /* Adjust the width as desired */
-    height: 600px; /* Adjust the height as desired */
+    width: 500px; 
+    height: 600px; 
     border-radius: 20px;
     background-size: cover;
     background-position: center;
@@ -26,6 +26,7 @@
     justify-content: center;
     align-items: center;
     height: 70vh;
+    margin-top: 20px;
   }
   
   .swipe {
@@ -54,4 +55,34 @@
     font-size: 20px;
     margin-top: 30%;
   }
+/* 
+  .loading-spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  } */
+
+  .loading-spinner-container {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* height: vh; */
+    padding-top: 50px;
+  }
   
+  
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+/* .swipeButtons-conatiner{
+    margin-top: 60xx;
+  } */
+  
+.loading-spinner-h1{
+    font-family: vidaloka;
+}

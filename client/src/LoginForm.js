@@ -3,7 +3,7 @@ import AppContext from './AppContext';
 import { useHistory } from "react-router-dom";
 import './LoginForm.css'
 
-function LoginForm({ setUser, setLoginOrSignup, setChatPageRender }) {
+function LoginForm({ setUser, setLoginOrSignup, setChatPageRender, setIsLoggedIn }) {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -25,6 +25,7 @@ function LoginForm({ setUser, setLoginOrSignup, setChatPageRender }) {
             history.push('/')
               setUser(user)
               setChatPageRender(true)
+              setIsLoggedIn(true)
 
           })
         } else {
