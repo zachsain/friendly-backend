@@ -100,8 +100,10 @@
   color: #555;
 } 
 
-
-
-
+.edit{
+  padding: 40px;
+  /* border-color: #fff; */
+  /* background-color: antiquewhite; */
+}
 
 

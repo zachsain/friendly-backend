@@ -6,12 +6,13 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { IconButton, Badge } from '@mui/material';
 import {Link, useHistory } from "react-router-dom";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import SettingsIcon from '@mui/icons-material/Settings';
 import "./Header.css"
 
 
 function Header( ) {
   const history = useHistory()
-  const {user, chatPageRender} = useContext(AppContext) 
+  const {user, chatPageRender, isOnUserProfile, setIsOnUserProfile, setShowLogout} = useContext(AppContext) 
   const [unopenedMessagesCount, setUnopenedMessagesCount] = useState(0);
   const [unopenedMatchesCount, setUnopenedMatchesCount] = useState(0)
   let unreadMessages = 0
@@ -42,54 +43,52 @@ function Header( ) {
   console.log(unopenedMessagesCount)
 
   unreadMessages = unopenedMatchesCount + unopenedMessagesCount
-  // console.log(user)
-  // console.log(user.messages)
-
-  // let messages = user.messages.filter((m) => m.receiver_id === user.id && m.receiver_read === null)
-  // let messageCount = messages.length
-
-  // let matches = user.matches.filter((m) => m.user1_id === user.id || m.user2_id === user.id)
-  // let matchCount = 0
-  // matches.forEach((m) => {
-  //   if (m.user1_id === user.id && m.user1_opened === null){
-  //     matchCount++
-  //   } else if (m.user2_id === user.id && m.user2_opened === null){
-  //     matchCount++
-  //   }
-  // })
-
-  // console.log(matchCount)
-
-  // unreadMessages = messageCount + matchCount
-  // console.log(unreadMessages)
 
   return (
     <div className="header">
-  
-        
-        {/* <IconButton onClick={() => history.replace(backButton)}>
-          <ArrowBackIosIcon fontSize="large" className="header__icon"/>
-        </IconButton> */}
+      {isOnUserProfile ? (
+        <IconButton>
+         <SettingsIcon onClick={() => setShowLogout(true)} className="header__icon" fontSize='large'/>
+        </IconButton>
+      ) : (
         <Link to="/userprofile">
           <IconButton> 
             <Person2Icon className="header__icon" fontSize="large"/>
           </IconButton>
         </Link>
-       
+      )}
+
+
+        {/* <Link to="/userprofile">
+          <IconButton> 
+            <Person2Icon className="header__icon" fontSize="large"/>
+          </IconButton>
+        </Link> */}
+
+        
+
         <Link to="/">
           <img 
               className="header__logo"
               src="https://i.imgur.com/8H6MxYS.png"
               // src="https://www.canva.com/design/DAFkhcTlSoU/UXZyJ7Cpy0cDVjYYAUf3_Q/view?utm_content=DAFkhcTlSoU&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" 
               alt="tinder-logo"
-          />
-          
+              onClick={() => setIsOnUserProfile(false)}
+          />     
         </Link>
         
         <Link to="/chat">
           <IconButton>
-          <Badge badgeContent={unreadMessages} color="error">
-              <ForumIcon className="header__icon" fontSize="large" />
+            <Badge
+              badgeContent={unreadMessages}
+              color="error"
+              classes={{ badge: 'custom-badge' }}
+            >
+              <ForumIcon
+                className="header__icon"
+                fontSize="large"
+                onClick={() => setIsOnUserProfile(false)}
+              />
             </Badge>
           </IconButton>
         </Link>

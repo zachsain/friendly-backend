@@ -3,6 +3,13 @@ import AppContext from './AppContext';
 import {useHistory} from "react-router-dom";
 import './ProfileEditForm.css'
 import { imageListClasses } from '@mui/material';
+import CloseFullscreenRoundedIcon from '@mui/icons-material/CloseFullscreenRounded';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton } from '@mui/material';
+import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
+
 
 function ProfileEditForm({imageUrl, setIsEditFormVisible}) {
   const {user, setUser} = useContext(AppContext);
@@ -57,6 +64,8 @@ function ProfileEditForm({imageUrl, setIsEditFormVisible}) {
 //     setDisplayImage(e.target.files[0])
 // }
 
+// testing 
+
 function onImageChange(e) {
   const file = e.target.files[0];
   if (file) {
@@ -67,6 +76,11 @@ function onImageChange(e) {
   return (
     <div className="edit-form-container">
         <form className="edit-form" >
+
+          <IconButton className="back-button-icon" onClick={() => setIsEditFormVisible(false)}>
+            <ArrowBackOutlinedIcon />
+          </IconButton>
+
         {/* <h2 className="edit-heading">Edit Profile:</h2> */}
         <input
           type="text"

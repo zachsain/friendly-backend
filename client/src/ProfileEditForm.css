@@ -5,8 +5,10 @@
     height: 100vh;
     background-color: transparent;
      /* margin-bottom: -30px; */
-     margin: -30px;
-     padding: -30px;
+     /* margin: -55px; */
+     margin: -40px;
+     /* padding: -30px; */
+     position: relative;
   }
   
   .edit-form {
@@ -50,8 +52,12 @@
   .userEdit__image {
     border-radius: 20px;
     height: 350px;
-    width: 100%;
-    object-fit: contain;
+    width: 90%;
+    /* padding-left: 30px; */
+    margin-left: 20px;
+    /* width: 340px;
+    height: 435px; */
+    object-fit: cover;
     margin-bottom: 20px;
   }
   
@@ -59,7 +65,7 @@
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #34f186;
+    background-color: #0071BC;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -71,4 +77,31 @@
     color: red;
     margin-top: 10px;
   }
+  
+  .back-button{
+    position: absolute;
+    top: -28px;
+    left: 390px;
+    border-radius: 20%;
+  }
+
+  /* .back-button-icon .MuiSvgIcon-root {
+    font-size: 35px;
+    position: absolute;
+    top: -28px;
+    left: 390px;
+    border-radius: 40px;
+    color: #0071BC; 
+  } */
+
+  .back-button-icon .MuiSvgIcon-root {
+    font-size: 33px;
+    position: absolute;
+    top: -30px;
+    left: -25px;
+    bottom: 70px;
+    border-radius: 40px;
+    color: #0071BC; 
+  }
+
   

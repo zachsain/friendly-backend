@@ -25,6 +25,8 @@ function App() {
   const [logout, setLogout] = useState(false)
   const [render, setRender] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isOnUserProfile, setIsOnUserProfile] = useState(false)
+  const [showLogout, setShowLogout] = useState(false)
 
   // useEffect(() => {
   //   fetch("/me").then((r) => {
@@ -48,7 +50,8 @@ function App() {
             setUser(user.user);
             setMatches(user.matched_with);
             setIsLoaded(true);
-            setIsLoggedIn(true); // Set isLoggedIn to true if the user is logged in
+            setIsLoggedIn(true); 
+            setIsOnUserProfile(false);
           });
         } else {
           setIsLoaded(true); // Set isLoaded to true even if the request fails
@@ -59,20 +62,6 @@ function App() {
       });
   }, [chatPageRender]);
 
-  function handleLogout(e){
-    e.preventDefault();        
-    fetch("/logout", { method: "DELETE" }).then((r) => {
-        if (r.ok) {
-          console.log("good bye")
-          setUser(null)
-          setMatches(null)
-          setChatPageRender(false)
-          setIsLoaded(false)
-          setIsLoggedIn(false)
-          setLogout(true)
-        }
-      });
-  }
 
   console.log(user)
   console.log(matches)
@@ -90,7 +79,7 @@ function App() {
 
   if (!user) return (
     <div>
-        <Login setIsLoggedIn={setIsLoggedIn} setChatPageRender={setChatPageRender} setUser={setUser} />
+        <Login setShowLogout={setShowLogout} setIsOnUserProfile={setIsOnUserProfile} setIsLoggedIn={setIsLoggedIn} setChatPageRender={setChatPageRender} setUser={setUser} />
     </div>)
 
   
@@ -105,7 +94,11 @@ function App() {
         isLoaded, 
         setIsLoaded,
         chatPageRender,
-        setChatPageRender
+        setChatPageRender, 
+        isOnUserProfile, 
+        setIsOnUserProfile,
+        showLogout,
+        setShowLogout
       }}>
     <Header /> 
       <Switch>
@@ -131,7 +124,6 @@ function App() {
             )}
           </Route>
       </Switch>
-      <button onClick={handleLogout}>LogOut</button> 
       </AppContext.Provider>
     </div>
   );

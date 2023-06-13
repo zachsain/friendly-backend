@@ -18,37 +18,13 @@ function Card() {
   const tinderCardRef = useRef(null);
   const [imageDimensions, setImageDimensions] = useState({});
   const [isEndOfProfiles, setIsEndOfProfiles] = useState(false);
-  let isLandscape;
-
-  async function fetchImageDimensions(url) {
-    try {
-      isLandscape = await isLandscapeImage(url);
-      const dimensions = isLandscape ? { width: '100%', height: 'auto' } : { width: 'auto', height: '100%' };
-      setImageDimensions(dimensions);
-    } catch (error) {
-      console.error('Error determining image dimensions:', error);
-      setImageDimensions({ width: '100%', height: 'auto' });
-    }
-  }
-
-  async function isLandscapeImage(url) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = url;
-      img.onload = () => {
-        const { width, height } = img;
-        const isLandscape = width > height;
-        resolve(isLandscape);
-      };
-      img.onerror = () => reject();
-    });
-  }
+  const [numberOfSwipes, setNumberOfSwipes] = useState(0)
 
 
   useEffect(() => {
     fetch('/profiles')
       .then((r) => r.json())
-      .then((p) => (setProfiles(p), setIsEndOfProfiles(p.length === 0)));
+      .then((p) => (setProfiles(p), setNumberOfSwipes(p.length)));
       
   }, []);
 
@@ -64,8 +40,8 @@ function Card() {
   function handleSwipeRight(id) {
     console.log('right');
     tinderCardRef.current.swipe('right');
-    console.log(id)
-
+    let amount = numberOfSwipes - 1
+    setNumberOfSwipes(amount)
     fetch("/swipes", {
       method: "POST",
       headers: {
@@ -98,7 +74,8 @@ function Card() {
   function handleSwipeLeft(id) {
     console.log('left');
     tinderCardRef.current.swipe('left');
-
+    let amount = numberOfSwipes - 1
+    setNumberOfSwipes(amount)
     fetch("/swipes", {
       method: "POST",
       headers: {
@@ -163,7 +140,7 @@ function Card() {
         
       ))}   
 
-      {isEndOfProfiles && (
+      {numberOfSwipes === 0 && (
         <div className="tinder--cards">
           <div className="tinder--card">
             <div className="loading-spinner-container">
