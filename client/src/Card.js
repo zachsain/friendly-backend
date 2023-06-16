@@ -115,7 +115,6 @@ function Card() {
               <div className="displayCard">
                 <div className="displayCard__image-container">
                   <img 
-                    // className={`tinder--card-img ${isLandscape ? 'tinder--card-img-landscape' : 'tinder--card-img-portrait'}`}
                     className='tinder--card-img'
                     src={p.featured_image.url} 
                     alt="profile-photo" 

@@ -8,16 +8,44 @@
     background-color: #ffffff
 }
 
-.chat-unread{
+.chat-read::after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    /* background-color: #0071bc; */
+    border-radius: 50%;
+    margin-right: -10px;
+    margin-left: 10px;
+  }
+
+
+.chat-unread {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px;
     height: 70px;
     border-bottom: 1px solid #fafafa;
-    border: 2px solid #1e1a15
-}
+    border: 1.7px solid #efedea;
+    /* border: 1.5px solid #dfddda; */
+  }
 
+
+  .chat-unread::after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #0071bc;
+    border-radius: 50%;
+    /* margin-right: -10px; */
+    margin-left: 10px;
+  }
+
+  .chat-unread > p {
+    color: black;
+  }
 .chat__details{
     flex: 1;
 }
@@ -27,10 +55,9 @@ a {
     color: inherit
 }
 
-/* a effects the Link component text dec takes away the lines color inherits from prev */
 
 .chat__details > p {
-    color: black;
+    color:  rgb(78, 77, 77);
 }
 
 .chat__image{
@@ -39,6 +66,7 @@ a {
 
 .chat__timestamp{
     color: lightgrey;
+    padding-right: 15px
 }
 
 #chat__noMessage{
@@ -46,7 +74,7 @@ a {
 }
 
 .handshake-emoji {
-    font-size: 1.5em; /* Adjust the font size to your desired value */
+    font-size: 1.5em; 
 }
 
 .chat__image{

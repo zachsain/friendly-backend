@@ -7,7 +7,7 @@ import "./ChatScreen.css"
 function ChatScreen() {
 
     const [messageContent, setMessageContent] = useState("")
-    const {user, setUser, matches, isLoaded, setChatPageRender} = useContext(AppContext);
+    const {user, setUser, matches, isLoaded, setChatPageRender, chatPageRender} = useContext(AppContext);
     const [profile, setProfile] = useState(null)
     const [matchId, setMatchId] = useState(0)
     const [matchObj, setMatchObj] = useState([])
@@ -16,9 +16,7 @@ function ChatScreen() {
     const { id } = useParams()
     const chatBoxRef = useRef(null);
     const history = useHistory()
-    // console.log(id)
-    // console.log(matches)
-
+ 
     useEffect(() => {
         if (isLoaded && matches) {
          
@@ -30,8 +28,8 @@ function ChatScreen() {
           );
         
           let messages = user && user.messages.filter((m) => m.match_id === match.id)
-        //   let messages = user && matches.messages.filter((m) => m.match_id === match.id)
-          setMsgObj(messages)
+          let sorted = user && messages.sort((a, b) => a.id - b.id)
+          setMsgObj(sorted)
           setMatchObj(match)
           setMatchId(match.id)
           setProfile(userProfile)
@@ -69,17 +67,10 @@ function ChatScreen() {
           }).then((r) => {
             if (r.ok) {
               r.json().then((obj) =>{
-                setMsgObj(obj.messages)
+                let sorted = obj.messages.sort((a, b) => a.id - b.id)
+                setMsgObj(sorted)
                 setMessageContent("")
-                setChatPageRender(true)
-
-                // let match = user && user.matches.find(
-                //     (m) =>
-                //       (m.user1_id === parseInt(id) || m.user1_id === user.id) &&
-                //       (m.user2_id === parseInt(id) || m.user2_id === user.id)
-                //   );
-                // setMatchObj(match);
-             
+                setChatPageRender(!chatPageRender)
               })   
             } else {
               r.json().then((err) => (console.log(err)));

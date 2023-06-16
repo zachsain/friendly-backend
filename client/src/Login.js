@@ -13,19 +13,28 @@ function Login({ setUser, setChatPageRender, setIsLoggedIn, setIsOnUserProfile, 
         {loginOrSignup ? 
             ( 
             <div>
-                <LoginForm setShowLogout={setShowLogout} setIsOnUserProfile={setIsOnUserProfile} setIsLoggedIn={setIsLoggedIn} setChatPageRender={setChatPageRender} setUser={setUser} setLoginOrSignup={setLoginOrSignup} />
+                <LoginForm 
+                  setShowLogout={setShowLogout} 
+                  setIsOnUserProfile={setIsOnUserProfile} 
+                  setIsLoggedIn={setIsLoggedIn} 
+                  setChatPageRender={setChatPageRender} 
+                  setUser={setUser} 
+                  setLoginOrSignup={setLoginOrSignup} 
+                />
                 <br />
             </div>
             ) 
             : 
             (
             <div>
-                <SignupForm setIsOnUserProfile={setIsOnUserProfile} setIsLoggedIn={setIsLoggedIn} setChatPageRender={setChatPageRender} setUser={setUser} setLoginOrSignup={setLoginOrSignup}  />
+                <SignupForm 
+                  setIsOnUserProfile={setIsOnUserProfile} 
+                  setIsLoggedIn={setIsLoggedIn} 
+                  setChatPageRender={setChatPageRender} 
+                  setUser={setUser} 
+                  setLoginOrSignup={setLoginOrSignup}  
+                />
                 <br />
-                {/* <div>
-                <h3 className="new-account-header">Or...</h3>
-                <button id="signup-btn" className='btn' onClick={() => setLoginOrSignup(true)}>Login</button>
-                </div> */}
             </div>
             )}
     </div>

@@ -121,7 +121,7 @@ function ChatPage() {
     console.log(matches)
     return (
       <ChatBox
-        key={[p.id]}
+        key={p.id}
         userName={user.profile.first_name}
         setChatPageRender={setChatPageRender}
         name={p.profile.first_name}

@@ -4,7 +4,18 @@ import { Avatar } from '@mui/material'
 import { Link } from 'react-router-dom'
 import "./ChatBox.css"
 
-function Chat({name, message, profilePic, timestamp, id, matchId, matchOpened, messageId, messageRead, mostRecentMessage}) {
+function Chat({
+                name, 
+                message, 
+                profilePic, 
+                timestamp, 
+                id, 
+                matchId, 
+                matchOpened, 
+                messageId, 
+                messageRead, 
+                mostRecentMessage
+              }) {
 
   const { chatPageRender, setChatPageRender, setIsLoaded } = useContext(AppContext)
 
