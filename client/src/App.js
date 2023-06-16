@@ -4,7 +4,7 @@ import Header from './Header';
 import { Switch, Route } from "react-router-dom";
 import Card from './Card';
 import SwipeButtons from './SwipeButtons';
-import Chats from './ChatPage';
+import ChatPage from './ChatPage';
 import ChatScreen from './ChatScreen';
 import UserProfile from './UserProfile';
 import Login from './Login';
@@ -101,7 +101,7 @@ function App() {
           <ChatScreen />
         </Route>
         <Route path = "/chat">
-          <Chats />
+          <ChatPage />
         </Route>
         <Route path = "/userprofile">
           <UserProfile />

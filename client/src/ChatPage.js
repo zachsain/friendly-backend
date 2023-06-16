@@ -76,16 +76,11 @@ function ChatPage() {
       let userOpenedId = null
       let matchId;
 
-      let messageRead;
+      let messageRead = false
 
-        // if (mostRecentMessage.receiver.id === user.id){
-        //   messageRead = mostRecentMessage.receevier_read
-        // } else {
-        //   messageRead = true
-        // }
-        console.log(mostRecentMessage)
+      console.log(mostRecentMessage)
 
-        if(mostRecentMessage){
+      if(mostRecentMessage){
         if (mostRecentMessage.receiver_id === user.id){
           messageRead = mostRecentMessage.receiver_read;
         } else {
@@ -119,6 +114,7 @@ function ChatPage() {
     const timestamp = mostRecentMessage ? getTimeDifference(mostRecentMessage.created_at) : null;
 
     console.log(matches)
+    
     return (
       <ChatBox
         key={p.id}

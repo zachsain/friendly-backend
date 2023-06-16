@@ -10,10 +10,9 @@
   .swipeButtons button {
     border: none;
     background-color: white;
-    box-shadow: 0px 10px 7px 0px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0px 3px 3px 3px rgba(0, 0, 0, 0.3) !important;
     border-radius: 50%; /* Add this property to make the buttons circular */
     padding: 11px; /* Adjust the padding as desired */
-
   }
   
   .swipeButtons__left {
@@ -22,7 +21,7 @@
   }
   
  .swipeButtons__right {
-    color: #76e2b3 !important;
+    color: #29ABE2 !important;
     cursor: pointer;
   } 
 

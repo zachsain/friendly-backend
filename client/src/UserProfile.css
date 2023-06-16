@@ -8,11 +8,11 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding: 30px;
+  /* padding: 30px; */
   position: relative;
   text-align: center;
   width: 90%;
-  max-width: 600px; /* Adjust the value to your desired width */
+  max-width: 500px; /* Adjust the value to your desired width */
   height: 600px; /* Set a fixed height to accommodate the larger image size */
   margin-top: 1.5vh;
   margin-bottom: 1.5vh;
@@ -44,18 +44,6 @@
     border-radius: 20px;
 }
 
-
-/* .userProfile:hover::after {
-  content: "Edit";
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #000;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-} */
 
 .userProfile__h1 {
   position: absolute;
@@ -91,8 +79,6 @@
 
 .edit{
   padding: 40px;
-  /* border-color: #fff; */
-  /* background-color: antiquewhite; */
 }
 
 

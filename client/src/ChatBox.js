@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import AppContext from './AppContext';
 import { Avatar } from '@mui/material'
 import { Link } from 'react-router-dom'
@@ -18,6 +18,7 @@ function Chat({
               }) {
 
   const { chatPageRender, setChatPageRender, setIsLoaded } = useContext(AppContext)
+  const [openedMsg, setOpenedMsg] = useState(false)
 
   let opened = false 
   
@@ -25,9 +26,9 @@ function Chat({
     opened = messageRead
   }
 
-  function handleProfileClick(e){
-    console.log('click')
-  }
+  // function handleProfileClick(e){
+  //   console.log('click')
+  // }
 
   const chatBoxClassName = opened ? "chat-read" : "chat-unread";
 
@@ -35,7 +36,7 @@ function Chat({
 
     setIsLoaded(true)
     setChatPageRender(!chatPageRender)
-  
+    console.log(chatBoxClassName)
 
      if (!matchOpened) {
       fetch(`/matches/${matchId}`, {
@@ -47,7 +48,7 @@ function Chat({
         })
       }).then((r) => {
         if (r.ok) {
-          r.json().then((m) => console.log(m))
+          r.json().then((m) => (console.log(m)))
         }
       })
         .catch((error) => {
@@ -64,7 +65,7 @@ function Chat({
           }),
         }).then((r) => {
           if (r.ok) {
-            r.json().then((m) => console.log(m))
+            r.json().then((m) => (console.log(m)))
           }
         })
           .catch((error) => {
@@ -82,7 +83,7 @@ function Chat({
     <Link to={`/chat/${id}`}>
     {/* <div className="chat"> */}
     <div onClick={handleOpen} className={chatBoxClassName}>
-        <Avatar onClick={handleProfileClick} className="chat__image" alt={name} src={profilePic} />
+        <Avatar className="chat__image" alt={name} src={profilePic} />
         <div className="chat__details">
             <h2>{name}</h2>
             {message ? (
