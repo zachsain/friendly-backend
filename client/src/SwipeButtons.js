@@ -1,6 +1,6 @@
 import React from 'react'
 import './SwipeButtons.css'
-import './Cards.css'
+import './Card.css'
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 

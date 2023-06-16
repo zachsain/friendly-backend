@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SwipeButtons from './SwipeButtons';
 import { Link } from 'react-router-dom'
-import './Cards.css';
+import './Card.css';
 import './DisplayCard.css';
 import './SwipeButtons.css'
 import {InfinitySpin, Rings} from 'react-loader-spinner';
@@ -120,7 +120,7 @@ function Card() {
                     alt="profile-photo" 
                   />
                   <h1 className="dislpayCard__h1">
-                    {p.first_name}
+                    {p.first_name} 
                   </h1>
                 </div>
               </div>

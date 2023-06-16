@@ -34,6 +34,7 @@
   }
   
   /* Optional: Add additional styling to enhance the card appearance */
+  
   .card-overlay {
     position: absolute;
     top: 0;
@@ -55,19 +56,8 @@
     font-size: 20px;
     margin-top: 30%;
   }
-/* 
-  .loading-spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  } */
 
   .loading-spinner-container {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    /* height: vh; */
     padding-top: 50px;
   }
   

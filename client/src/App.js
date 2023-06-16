@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Header';
-// import ReactDOM from "react-dom/client";
 import { Switch, Route } from "react-router-dom";
 import Card from './Card';
 import SwipeButtons from './SwipeButtons';
@@ -11,11 +10,7 @@ import UserProfile from './UserProfile';
 import Login from './Login';
 import AppContext from './AppContext';
 import ProfilePage from './ProfilePage';
-// import {Blocks} from "react-loader-spinner";
-// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import {InfinitySpin} from 'react-loader-spinner';
-
-// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 function App() {
   const [user, setUser] = useState(null)
