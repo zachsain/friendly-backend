@@ -13,23 +13,6 @@ function DisplayCard({name, dob, image, currentIndex, cardIndex, swipeContainerR
     const { user } = useContext(AppContext);
 
 
-    
-    function calculateAge(dateOfBirth) {
-        const dob = new Date(dateOfBirth);
-        const diffInMs = Date.now() - dob.getTime();
-        const ageDate = new Date(diffInMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-      }
-      
-    const age = calculateAge(dob);
-
-    function handleEditClick(){
-     
-    }
-
-    const cardStyle = {
-        transform: `translateX(${(cardIndex - currentIndex) * 100}%)`,
-      };
 
     return (
         <div className="tinder--card" >
