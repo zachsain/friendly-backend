@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
         render json: profile
     end 
      
-  
+    # test
     private
   
     def profile_params
