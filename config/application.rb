@@ -30,9 +30,16 @@ module ReactRailsApiProjectTemplate
     config.action_dispatch.cookies_same_site_protection = :strict
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
 
     # Configuration for the application, engines, and railties goes here.
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'http://localhost:3001' # Replace with the URL of your frontend application
+        resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      end
+    end
+
+    config.load_defaults 6.1
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.

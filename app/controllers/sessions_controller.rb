@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
-  before_action :authorize, only: [:destroy]
+  # before_action :authorize, only: [:destroy]
 
     def create 
         user = User.find_by(username: params[:username])
         if user&.authenticate(params[:password])
+          puts "User ID being set in session: #{user.id}"
           session[:user_id] = user.id
           render json: user, status: :created
         else

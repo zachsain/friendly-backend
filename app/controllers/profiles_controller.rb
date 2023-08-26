@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-    before_action :authorize, only: [:update, :index, :show]
+    # before_action :authorize, only: [:update, :index, :show]
     rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_data
   
     def index 
